@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request,session,jsonify,redirect
+from flask import request,session,jsonify,redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import URL
 
@@ -31,9 +31,10 @@ def home():
 
 @app.route('/validate', methods=['POST'])
 def login():
-    user = request.form.get('username',None)
-    passw = request.form.get('password', None)
+    user = request.json.get('username',None)
+    passw = request.json.get('password', None)
     login = Test.query.filter(Test.username==user, Test.password == passw).first()
+    print(request.json)
     if not login is None:
         session['username'] = user
         return jsonify(success=True)
