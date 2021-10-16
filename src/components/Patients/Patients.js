@@ -34,7 +34,6 @@ function Patients() {
                 Patients
                 <hr/>
             </h1>
-            
         </Row>
         <Row xs={1} md={3} className="g-4">
                 <PatientCard name="Geoffrey Xue" location="Madison" age="18" weight="900" height="93"/>  
