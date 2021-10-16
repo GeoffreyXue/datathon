@@ -84,6 +84,7 @@ def plotting():
             my_stringIObytes.seek(0)
             my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode('utf-8')
             b64.append(my_base64_jpgData)
+            plt.figure().close() 
         else:
             pass
     return Response(json.dumps(b64),  mimetype='application/json')
