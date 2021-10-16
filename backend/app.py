@@ -39,6 +39,9 @@ def login():
         return jsonify(success=True)
     else:
         return jsonify(success = False)
+@app.route('/check_session',methods=['POST'])
+def check_session():
+    return jsonify(success = True) if session.get('username', False) else jsonify(success = False)
 @app.route('/logout')
 def logout():
     session.pop('username',None)
