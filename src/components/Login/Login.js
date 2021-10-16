@@ -91,11 +91,21 @@ function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             </Form.Group>
-                            {fetching ? <Spinner animation="border" /> :
-                                <Button className="LoginButton" block size="lg" type="submit" disabled={!validateForm()} onClick={login}>
-                                    Login
-                                </Button>
-                            }  
+                            <Button className="LoginButton" block size="lg" type="submit" disabled={!validateForm()} onClick={login}>
+                                {fetching ? 
+                                    <div>
+                                        <Spinner
+                                            as="span"
+                                            animation="grow"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        Loading... 
+                                    </div> :
+                                    <div>Login</div>
+                                    }
+                            </Button>
                         </Form>
                     </div>
                 </Container>

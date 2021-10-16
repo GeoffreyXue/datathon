@@ -1,0 +1,9 @@
+.PatientSet {
+    padding: 0 1vw;
+}
+
+.Pagination {
+    padding: 1vh 0;
+    display: flex;
+    justify-content:space-between;
+}

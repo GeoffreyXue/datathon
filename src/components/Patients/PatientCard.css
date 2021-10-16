@@ -1,6 +1,5 @@
 @media all and (min-width: 480px) {
     .PatientCard {
-        width: "33%";
-        min-width: "400px";
+        flex: 1;
     }
   }

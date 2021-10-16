@@ -7,7 +7,6 @@ import PredictionModal from "./../PredictionModal/PredictionModal";
 
 import banana from "../../images/banana.jpg";
 
-import "./Patient.css";
 
 function PatientCard(props) {
 
@@ -20,7 +19,7 @@ function PatientCard(props) {
 
     return (
         <div className = "PatientCard">
-            <Card>
+            <Card border="secondary" style={{ borderWidth: '5px' }}>
                 <Card.Img className='CardImage' variant="top" src={banana}/>
                 <hr/>
                 <Card.Body>
@@ -36,7 +35,6 @@ function PatientCard(props) {
                     </Button>
                 </Card.Body>
             </Card>
-
             <PredictionModal patient={patient} show={show} handleClose={handleClose}/>
         </div>
     );
