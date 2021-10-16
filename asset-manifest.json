@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/datathon/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/datathon/static/js/main.c8fc9337.chunk.js",
+    "main.js.map": "/datathon/static/js/main.c8fc9337.chunk.js.map",
+    "runtime-main.js": "/datathon/static/js/runtime-main.0f11af43.js",
+    "runtime-main.js.map": "/datathon/static/js/runtime-main.0f11af43.js.map",
+    "static/css/2.0a9ec390.chunk.css": "/datathon/static/css/2.0a9ec390.chunk.css",
+    "static/js/2.6ec13245.chunk.js": "/datathon/static/js/2.6ec13245.chunk.js",
+    "static/js/2.6ec13245.chunk.js.map": "/datathon/static/js/2.6ec13245.chunk.js.map",
+    "static/js/3.d210f433.chunk.js": "/datathon/static/js/3.d210f433.chunk.js",
+    "static/js/3.d210f433.chunk.js.map": "/datathon/static/js/3.d210f433.chunk.js.map",
+    "index.html": "/datathon/index.html",
+    "static/css/2.0a9ec390.chunk.css.map": "/datathon/static/css/2.0a9ec390.chunk.css.map",
+    "static/css/main.6dea0f05.chunk.css.map": "/datathon/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.6ec13245.chunk.js.LICENSE.txt": "/datathon/static/js/2.6ec13245.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0f11af43.js",
+    "static/css/2.0a9ec390.chunk.css",
+    "static/js/2.6ec13245.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.c8fc9337.chunk.js"
+  ]
+}
