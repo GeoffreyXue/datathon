@@ -4,18 +4,26 @@ import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 
 import PredictionModal from "./../PredictionModal/PredictionModal";
+import StatModal from './../StatModal/StatModal';
 
 import banana from "../../images/banana.jpg";
+
+import './PatientCard.css';
 
 
 function PatientCard(props) {
 
     var patient = props.patient ?? {};
 
-    const [show, setShow] = useState(false);
+    const [pShow, setPShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handlePClose = () => setPShow(false);
+    const handlePShow = () => setPShow(true);
+
+    const [sShow, setSShow] = useState(false);
+
+    const handleSClose = () => setSShow(false);
+    const handleSShow = () => setSShow(true);
 
     return (
         <div className = "PatientCard">
@@ -30,12 +38,19 @@ function PatientCard(props) {
                         <ListGroup.Item>Weight: {patient.weight ?? 150} lb</ListGroup.Item>
                     </ListGroup>
                     
-                    <Button className="Prediction" block size="lg" onClick={handleShow}>
-                        Run Prediction
-                    </Button>
+                    <div className="ButtonGrouping">
+                        <Button className="Stats" block size="lg" onClick={handleSShow}>
+                            Get Stats
+                        </Button>
+                        <Button className="Prediction" block size="lg" onClick={handlePShow}>
+                            Run Prediction
+                        </Button>
+                    </div>
+
                 </Card.Body>
             </Card>
-            <PredictionModal patient={patient} show={show} handleClose={handleClose}/>
+            <PredictionModal patient={patient} show={pShow} handleClose={handlePClose}/>
+            <StatModal patient={patient} show={sShow} handleClose={handleSClose}/>
         </div>
     );
 }

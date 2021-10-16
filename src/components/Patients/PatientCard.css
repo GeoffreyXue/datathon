@@ -2,4 +2,10 @@
     .PatientCard {
         flex: 1;
     }
-  }
+}
+
+.ButtonGrouping {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
