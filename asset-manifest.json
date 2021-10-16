@@ -1,25 +1,26 @@
 {
   "files": {
-    "main.css": "/datathon/static/css/main.ae7300da.chunk.css",
-    "main.js": "/datathon/static/js/main.0e9ce484.chunk.js",
-    "main.js.map": "/datathon/static/js/main.0e9ce484.chunk.js.map",
-    "runtime-main.js": "/datathon/static/js/runtime-main.83386893.js",
-    "runtime-main.js.map": "/datathon/static/js/runtime-main.83386893.js.map",
+    "main.css": "/datathon/static/css/main.1deb009b.chunk.css",
+    "main.js": "/datathon/static/js/main.d522eeda.chunk.js",
+    "main.js.map": "/datathon/static/js/main.d522eeda.chunk.js.map",
+    "runtime-main.js": "/datathon/static/js/runtime-main.b64a89f8.js",
+    "runtime-main.js.map": "/datathon/static/js/runtime-main.b64a89f8.js.map",
     "static/css/2.0a9ec390.chunk.css": "/datathon/static/css/2.0a9ec390.chunk.css",
-    "static/js/2.d0bff873.chunk.js": "/datathon/static/js/2.d0bff873.chunk.js",
-    "static/js/2.d0bff873.chunk.js.map": "/datathon/static/js/2.d0bff873.chunk.js.map",
-    "static/js/3.309812be.chunk.js": "/datathon/static/js/3.309812be.chunk.js",
-    "static/js/3.309812be.chunk.js.map": "/datathon/static/js/3.309812be.chunk.js.map",
+    "static/js/2.a9ce2a7d.chunk.js": "/datathon/static/js/2.a9ce2a7d.chunk.js",
+    "static/js/2.a9ce2a7d.chunk.js.map": "/datathon/static/js/2.a9ce2a7d.chunk.js.map",
+    "static/js/3.074b3a1f.chunk.js": "/datathon/static/js/3.074b3a1f.chunk.js",
+    "static/js/3.074b3a1f.chunk.js.map": "/datathon/static/js/3.074b3a1f.chunk.js.map",
     "index.html": "/datathon/index.html",
     "static/css/2.0a9ec390.chunk.css.map": "/datathon/static/css/2.0a9ec390.chunk.css.map",
-    "static/css/main.ae7300da.chunk.css.map": "/datathon/static/css/main.ae7300da.chunk.css.map",
-    "static/js/2.d0bff873.chunk.js.LICENSE.txt": "/datathon/static/js/2.d0bff873.chunk.js.LICENSE.txt"
+    "static/css/main.1deb009b.chunk.css.map": "/datathon/static/css/main.1deb009b.chunk.css.map",
+    "static/js/2.a9ce2a7d.chunk.js.LICENSE.txt": "/datathon/static/js/2.a9ce2a7d.chunk.js.LICENSE.txt",
+    "static/media/banana.02b3ac43.jpg": "/datathon/static/media/banana.02b3ac43.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.83386893.js",
+    "static/js/runtime-main.b64a89f8.js",
     "static/css/2.0a9ec390.chunk.css",
-    "static/js/2.d0bff873.chunk.js",
-    "static/css/main.ae7300da.chunk.css",
-    "static/js/main.0e9ce484.chunk.js"
+    "static/js/2.a9ce2a7d.chunk.js",
+    "static/css/main.1deb009b.chunk.css",
+    "static/js/main.d522eeda.chunk.js"
   ]
 }
