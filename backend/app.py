@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Response
 from flask import request,session,jsonify,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import URL
@@ -56,7 +56,7 @@ def averages(rows):
             classify["total"] = len(rows)
             lisd.append([j, classify])
     return lisd
-
+@app.route('/plots')
 def plotting(person, lists):
     obj = session.query(PersonalInfo).filter(PersonalInfo.Name == person).one()
     dicts = obj.__dict__
@@ -72,7 +72,7 @@ def plotting(person, lists):
             my_stringIObytes.seek(0)
             my_base64_jpgData = base64.b64encode(my_stringIObytes.read())
             b64.append(my_base64_jpgData)
-    return b64
+    return Response(json.dumps(b64),  mimetype='application/json')
 
 @app.route('/')
 def home():
