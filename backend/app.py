@@ -14,7 +14,7 @@ import io
 import base64
 import matplotlib.image as mpimg
 import random
-import json
+import simplejson as json
 from flask_cors import CORS
 # Google Cloud SQL (change this accordingly)
 PASSWORD ="cohen0731"
@@ -42,6 +42,8 @@ class Test(db.Model):
 
 class PersonalInfo(db.Model):  
     __table__ = Table('PersonalInfo', meta, autoload = True, autoload_with=db.engine)
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 def averages(rows):
     lisd = []
@@ -91,7 +93,8 @@ def page():
         return jsonify(success = False)
     pages = request.json.get('pages')
     lists = sessions.query(PersonalInfo).filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
-    return Response(json.dumps([json.dumps(i.__dict__ )for i in lists]), mimetype= 'application/json')
+    good = [i.as_dict() for i in lists]
+    return Response(json.dumps(good, use_decimal=True), mimetype= 'application/json')
 
 @app.route('/')
 def home():
