@@ -31,7 +31,7 @@ db = SQLAlchemy(app)
 
 meta = MetaData()
 Session = sessionmaker(bind = db.engine)
-session = Session()
+sessions = Session()
 
 class Test(db.Model):
     pid = db.Column(db.Integer, primary_key=True)
@@ -59,11 +59,11 @@ def averages(rows):
     return lisd
 @app.route('/plots', methods=['POST'])
 def plotting():
-    lists = averages(session.query(PersonalInfo).all())
+    lists = averages(sessions.query(PersonalInfo).all())
     if(not request.json.get("person", None)):
         return jsonify(success=False)
     person = request.json.get("person")
-    obj = session.query(PersonalInfo).filter(PersonalInfo.Name == person).one()
+    obj = sessions.query(PersonalInfo).filter(PersonalInfo.Name == person).one()
     dicts = obj.__dict__
     b64 = []
     for i in lists:
@@ -78,6 +78,8 @@ def plotting():
             my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode('utf-8')
             b64.append(my_base64_jpgData)
     return Response(json.dumps(b64),  mimetype='application/json')
+
+
 @app.route('/')
 def home():
     return jsonify(dumb = True)
