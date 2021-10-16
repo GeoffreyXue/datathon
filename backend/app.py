@@ -81,11 +81,13 @@ def plotting():
             my_stringIObytes.seek(0)
             my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode('utf-8')
             b64.append(my_base64_jpgData)
+        else:
+            pass
     return Response(json.dumps(b64),  mimetype='application/json')
 
-@app.route('/page')
+@app.route('/page', methods=['POST'])
 def page():
-    if(0 and not request.json.get('pages', None)):
+    if(not request.json.get('pages', None)):
         return jsonify(success = False)
     #pages = request.json.get('pages')
     pages = 10
