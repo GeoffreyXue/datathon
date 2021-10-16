@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
+import { Calendar as Cal, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
+
+const localizer = momentLocalizer(moment)
 
 import "./Calendar.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 function Calendar() {
 
@@ -17,7 +22,13 @@ function Calendar() {
             
         </Row>
         <Row className="m-3">
-            
+            <Cal
+            localizer={localizer}
+            events={myEventsList}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: 500 }}
+            />
         </Row>
     </Container>
   );
