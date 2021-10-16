@@ -91,7 +91,7 @@ def page():
         return jsonify(success = False)
     pages = request.json.get('pages')
     lists = sessions.query(PersonalInfo).filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
-    return Response([i.__dict__ for i in lists], mimetype= 'application/data')
+    return Response([i.__dict__ for i in lists], mimetype= 'application/text')
 
 @app.route('/')
 def home():
