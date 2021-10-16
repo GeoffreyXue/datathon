@@ -1,28 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+import { Redirect } from 'react-router';
+
+import LoginContext from '../../LoginContext';
+
 import "./Login.css";
 
 // taken from https://serverless-stack.com/chapters/create-a-login-page.html
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [loggedIn, setLoggedIn] = useContext(LoginContext);
+const [loginSuccess, setLoginSuccess] = useState(false);
 
-  function validateForm() {
+function validateForm() {
     return email.length > 0 && password.length > 0;
-  }
+}
 
-  function handleSubmit(event) {
+function handleSubmit(event) {
     event.preventDefault();
-  }
+}
 
-  return (
-      <Container className="container-fluid">
+function login() {
+    console.log("LOGGING IN");
+    setLoggedIn(true);
+    setLoginSuccess(true);
+}
+
+return (
+    <Container className="container-fluid">
+        {loginSuccess ? <Redirect to="/patients" /> : null}
         <Row>
         <Col className="d-flex flex-wrap">
             <Container>
@@ -46,7 +59,7 @@ function Login() {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         </Form.Group>
-                        <Button className="LoginButton" block size="lg" type="submit" disabled={!validateForm()}>
+                        <Button className="LoginButton" block size="lg" type="submit" disabled={!validateForm()} onClick={login}>
                         Login
                         </Button>
                     </Form>
@@ -54,8 +67,8 @@ function Login() {
             </Container>
         </Col>
         </Row>
-      </Container>
-  );
+    </Container>
+);
 }
 
 export default Login;
