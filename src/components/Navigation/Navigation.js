@@ -12,8 +12,8 @@ function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-                <Nav.Link href="/datathon">Home</Nav.Link>
-                <Nav.Link href="/datathon/#team">Team</Nav.Link>
+                {/* <Nav.Link href="/datathon">Home</Nav.Link> */}
+                <Nav.Link href="/datathon/#patients">Patients</Nav.Link>
             </Nav>
             <Nav>
                 <Nav.Link href="/datathon/#login">Login</Nav.Link>
