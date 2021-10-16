@@ -27,7 +27,10 @@ class Test(db.Model):
 
 @app.route('/')
 def home():
-    return
+    if(check_session()):
+        return redirect('/datathon/patients',code = 302)
+    else:
+        return redirect('/login', code = 302)
 
 @app.route('/validate', methods=['POST'])
 def login():
@@ -39,7 +42,6 @@ def login():
         return jsonify(success=True)
     else:
         return jsonify(success = False)
-@app.route('/check_session',methods=['POST'])
 def check_session():
     return jsonify(success = True) if session.get('username', False) else jsonify(success = False)
 @app.route('/logout')
