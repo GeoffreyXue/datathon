@@ -6,9 +6,11 @@ from sqlalchemy import MetaData,Table
 from sqlalchemy.orm import sessionmaker
 from collections import defaultdict
 import uuid
+import matplotlib
+matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
-import matplotlib.pyplot as plt
 import io
 import base64
 import matplotlib.image as mpimg
