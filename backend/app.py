@@ -57,7 +57,11 @@ def averages(rows):
             lisd.append([j, classify])
     return lisd
 @app.route('/plots')
-def plotting(person, lists):
+def plotting():
+    lists = averages(session.query(PersonalInfo).all())
+    if(not request.args.get(person, None)):
+        return jsonify(success=False)
+    person = request.args.get(person)
     obj = session.query(PersonalInfo).filter(PersonalInfo.Name == person).one()
     dicts = obj.__dict__
     b64 = []
