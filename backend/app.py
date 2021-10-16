@@ -8,7 +8,6 @@ from collections import defaultdict
 import uuid
 import matplotlib
 matplotlib.use('Agg')
-
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import io
@@ -70,11 +69,13 @@ def plotting():
     dicts = obj.__dict__
     b64 = []
     for i in lists:
+        print(i[0])
         if(type(i[1]) == float):
             package = [i[1],dicts[i[0]]]
             rgb = [(random.random(), random.random(), random.random()) for i in range(2)]
             plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
-            imgs = plt.bar([person, "Average"],package,align='center', color=rgb)
+            ax = plt.bar([person, "Average"],package,align='center', color=rgb)
+            plt.ylabel(i[0])
             my_stringIObytes = io.BytesIO()
             plt.savefig(my_stringIObytes, format='jpg')
             my_stringIObytes.seek(0)
@@ -82,6 +83,14 @@ def plotting():
             b64.append(my_base64_jpgData)
     return Response(json.dumps(b64),  mimetype='application/json')
 
+@app.route('/page')
+def page():
+    if(0 and not request.json.get('pages', None)):
+        return jsonify(success = False)
+    #pages = request.json.get('pages')
+    pages = 10
+    lists = sessions.query(PersonalInfo).filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
+    return Response(json.dumps([i.__dict__ for i in lists]), mimetype= 'application/json')
 
 @app.route('/')
 def home():
