@@ -1,11 +1,51 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Container from 'react-bootstrap/Container';
+import Spinner from 'react-bootstrap/Spinner';
+import Row from 'react-bootstrap/Row';
 import ListGroup from "react-bootstrap/ListGroup";
 import Modal from "react-bootstrap/Modal";
 import "./StatModal.css";
 
 function StatModal(props) {
+    const [plots, setPlots] = useState([]);
+    const [fetching, setFetching] = useState(false);
+
+    function getStats() {
+        var data = {
+            person: "Molly Warren"
+        };
+
+        setFetching(true);
+
+        fetch("http://localhost:5000/plots", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then((res) => res.json())
+        .then((res) => {
+            console.log(res);
+            res.map((base64) => {
+                setPlots(...plots, 'data:image/png;base64,' + base64);
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .finally(() => {
+            setFetching(false);
+        });
+    }
+
+    useEffect(() => {
+        if (props.show) {
+            getStats();
+        }
+    }, [props.show])
 
     return (
         <div className = "StatModal">
@@ -17,11 +57,17 @@ function StatModal(props) {
 
                 <Modal.Body>
                     Statistics
-                    <ListGroup variant="flush">
-                        <ListGroup.Item>Age: {props.patient.age ?? 20}</ListGroup.Item>
-                        <ListGroup.Item>Height: {props.patient.height ?? 160} in</ListGroup.Item>
-                        <ListGroup.Item>Weight: {props.patient.weight ?? 150} lb</ListGroup.Item>
-                    </ListGroup>
+                    <div>
+                    {fetching ? <Spinner animation="border" /> :
+                        <Container>
+                            <Row xs={1} md={3} className="g-4">
+                                {plots.map((plot) => (
+                                    <img src={plot}/>
+                                ))}
+                            </Row>
+                        </Container>
+                    }
+                    </div>
                 </Modal.Body>
 
                 <Modal.Footer>
