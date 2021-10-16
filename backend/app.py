@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request,session,jsonify
+from flask import request,session,jsonify,redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import URL
 
@@ -43,7 +43,7 @@ def login():
     else:
         return jsonify(success = False)
 def check_session():
-    return jsonify(success = True) if session.get('username', False) else jsonify(success = False)
+    return True if session.get('username', False) else False
 @app.route('/logout')
 def logout():
     session.pop('username',None)
