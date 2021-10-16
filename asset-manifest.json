@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/datathon/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/datathon/static/js/main.c8fc9337.chunk.js",
-    "main.js.map": "/datathon/static/js/main.c8fc9337.chunk.js.map",
+    "main.js": "/datathon/static/js/main.e7ba2bb9.chunk.js",
+    "main.js.map": "/datathon/static/js/main.e7ba2bb9.chunk.js.map",
     "runtime-main.js": "/datathon/static/js/runtime-main.0f11af43.js",
     "runtime-main.js.map": "/datathon/static/js/runtime-main.0f11af43.js.map",
     "static/css/2.0a9ec390.chunk.css": "/datathon/static/css/2.0a9ec390.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.0a9ec390.chunk.css",
     "static/js/2.6ec13245.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.c8fc9337.chunk.js"
+    "static/js/main.e7ba2bb9.chunk.js"
   ]
 }
