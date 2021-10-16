@@ -74,6 +74,7 @@ def plotting():
         print(i[0])
         if(type(i[1]) == float):
             package = [dicts[i[0]], i[1]]
+            print(package)
             rgb = [(random.random(), random.random(), random.random()) for i in range(2)]
             plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
             ax = plt.bar([person, "Average"],package,align='center', color=rgb)
