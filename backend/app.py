@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request,session,jsonify,redirect, url_for
+from flask import request,session,jsonify,redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import URL
 
@@ -24,7 +24,11 @@ class Test(db.Model):
     pid = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120), unique=True, nullable=False)
+class PersonalInfo(db.Model):
+    __table__ = db.Model.metadata.tables['PersonalInfo']
 
+
+print(db.engine.table_names())
 @app.route('/')
 def home():
     return jsonify(dumb = True)
@@ -34,7 +38,6 @@ def login():
     user = request.json.get('username',None)
     passw = request.json.get('password', None)
     login = Test.query.filter(Test.username==user, Test.password == passw).first()
-    print(request.json)
     if not login is None:
         session['username'] = user
         return jsonify(success=True)
