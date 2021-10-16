@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request,session,jsonify,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import URL
+from sqlalchemy import MetaData
 
 import uuid
 
@@ -19,14 +20,20 @@ app.secret_key = uuid.uuid4().hex
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{PASSWORD}@{PUBLIC_IP_ADDRESS}:3306/{DBNAME}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
 db  =  SQLAlchemy(app)
+META_DATA = MetaData(bind=db.engine)
+
 
 class Test(db.Model):
     pid = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120), unique=True, nullable=False)
-class PersonalInfo(db.Model):
-    __table__ = db.Model.metadata.tables['PersonalInfo']
 
+print(META_DATA.tables)
+'''
+class PersonalInfo(db.Model):
+    
+   # __table__ = META_DATA.tables['PersonalInfo']
+'''
 
 print(db.engine.table_names())
 @app.route('/')
