@@ -18,6 +18,7 @@ function StatModal(props) {
         };
 
         setFetching(true);
+        setPlots([]);
 
         fetch("http://localhost:5000/plots", {
             method: 'POST',
@@ -28,10 +29,12 @@ function StatModal(props) {
         })
         .then((res) => res.json())
         .then((res) => {
-            console.log(res);
-            res.map((base64) => {
-                setPlots(...plots, 'data:image/png;base64,' + base64);
+            res.forEach((base64) => {
+                // console.log(base64);
+                setPlots(plots => [...plots, 'data:image/png;base64,' + base64]);
             })
+            console.log(res.length);
+            console.log(plots);
         })
         .catch((err) => {
             console.log(err);
@@ -49,7 +52,7 @@ function StatModal(props) {
 
     return (
         <div className = "StatModal">
-            <Modal show={props.show} onHide={props.handleClose}>
+            <Modal show={props.show} onHide={props.handleClose} dialogClassName="modal-90w">
                 <Modal.Header>
                     <Modal.Title>Patient Statistics</Modal.Title>
                     <Button variant="secondary" onClick={props.handleClose}>Close</Button>
@@ -60,9 +63,9 @@ function StatModal(props) {
                     <div>
                     {fetching ? <Spinner animation="border" /> :
                         <Container>
-                            <Row xs={1} md={3} className="g-4">
-                                {plots.map((plot) => (
-                                    <img src={plot}/>
+                            <Row xs={1} md={1} className="g-4">
+                                {plots.map((plot, index) => (
+                                    <img key={index} src={plot}/>
                                 ))}
                             </Row>
                         </Container>

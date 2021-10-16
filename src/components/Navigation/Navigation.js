@@ -22,6 +22,7 @@ function Navigation() {
                 <Nav className="me-auto">
                     <Nav.Link href="/datathon/#patients">Patients</Nav.Link>
                     <Nav.Link href="/datathon/#calendar">Calendar</Nav.Link>
+                    <Nav.Link href="/datathon/#interactive">Interactive</Nav.Link>
                 </Nav> 
                 : null}
                 <Nav>
