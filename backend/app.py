@@ -75,7 +75,7 @@ def plotting():
             my_stringIObytes = io.BytesIO()
             plt.savefig(my_stringIObytes, format='jpg')
             my_stringIObytes.seek(0)
-            my_base64_jpgData = base64.b64encode(my_stringIObytes.read())
+            my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode('utf-8')
             b64.append(my_base64_jpgData)
     return Response(json.dumps(b64),  mimetype='application/json')
 @app.route('/')
