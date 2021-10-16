@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <HashRouter basename="/website">
+    <HashRouter basename="/datathon">
         <App />
     </HashRouter>,
   document.getElementById('root')
