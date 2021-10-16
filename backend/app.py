@@ -59,9 +59,9 @@ def averages(rows):
 @app.route('/plots')
 def plotting():
     lists = averages(session.query(PersonalInfo).all())
-    if(not request.args.get(person, None)):
+    if(not request.args.get("person", None)):
         return jsonify(success=False)
-    person = request.args.get(person)
+    person = request.args.get("person")
     obj = session.query(PersonalInfo).filter(PersonalInfo.Name == person).one()
     dicts = obj.__dict__
     b64 = []
@@ -77,7 +77,7 @@ def plotting():
             my_base64_jpgData = base64.b64encode(my_stringIObytes.read())
             b64.append(my_base64_jpgData)
     return Response(json.dumps(b64),  mimetype='application/json')
-
+@app.route(fil)
 @app.route('/')
 def home():
     return jsonify(dumb = True)
