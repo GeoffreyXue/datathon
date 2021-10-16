@@ -47,7 +47,7 @@ def averages(rows):
         avg = 0
         classify = defaultdict(int)
         dicts = vars(rows[0])
-        if(type(dicts[j]) == int and j != 'ID'):
+        if((type(dicts[j]) == int or type(dicts[j]) == float) and j != 'ID'):
             for i in rows:
                 avg += vars(i)[j]
             lisd.append([j, avg/len(rows)])
@@ -75,7 +75,7 @@ def plotting():
             my_stringIObytes = io.BytesIO()
             plt.savefig(my_stringIObytes, format='jpg')
             my_stringIObytes.seek(0)
-            my_base64_jpgData = base64.b64encode(my_stringIObytes.read().decode('ascii'))
+            my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode('utf-8')
             b64.append(my_base64_jpgData)
     return Response(json.dumps(b64),  mimetype='application/json')
 @app.route('/')
