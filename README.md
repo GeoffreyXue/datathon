@@ -2,6 +2,8 @@
 
 ## UW Madison Datathon 2021
 
+## See frontend: [https://geoffreyxue.github.io/datathon/](https://geoffreyxue.github.io/datathon/)
+
 ### Authors:
 Aiden Cohen  
 Alena Zhou  
