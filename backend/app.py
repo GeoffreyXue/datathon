@@ -13,6 +13,7 @@ import io
 import base64
 import matplotlib.image as mpimg
 import random
+import json
 # Google Cloud SQL (change this accordingly)
 PASSWORD ="cohen0731"
 PUBLIC_IP_ADDRESS ="35.224.73.35"
@@ -56,12 +57,12 @@ def averages(rows):
             classify["total"] = len(rows)
             lisd.append([j, classify])
     return lisd
-@app.route('/plots')
+@app.route('/plots', methods=['POST'])
 def plotting():
     lists = averages(session.query(PersonalInfo).all())
-    if(not request.args.get("person", None)):
+    if(not request.json.get("person", None)):
         return jsonify(success=False)
-    person = request.args.get("person")
+    person = request.json.get("person")
     obj = session.query(PersonalInfo).filter(PersonalInfo.Name == person).one()
     dicts = obj.__dict__
     b64 = []
@@ -77,7 +78,6 @@ def plotting():
             my_base64_jpgData = base64.b64encode(my_stringIObytes.read())
             b64.append(my_base64_jpgData)
     return Response(json.dumps(b64),  mimetype='application/json')
-@app.route(fil)
 @app.route('/')
 def home():
     return jsonify(dumb = True)
