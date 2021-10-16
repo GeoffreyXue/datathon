@@ -71,7 +71,7 @@ def plotting():
     for i in lists:
         print(i[0])
         if(type(i[1]) == float):
-            package = [i[1],dicts[i[0]]]
+            package = [dicts[i[0]], i[1]]
             rgb = [(random.random(), random.random(), random.random()) for i in range(2)]
             plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
             ax = plt.bar([person, "Average"],package,align='center', color=rgb)
@@ -89,8 +89,7 @@ def plotting():
 def page():
     if(not request.json.get('pages', None)):
         return jsonify(success = False)
-    #pages = request.json.get('pages')
-    pages = 10
+    pages = request.json.get('pages')
     lists = sessions.query(PersonalInfo).filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
     return Response(json.dumps([i.__dict__ for i in lists]), mimetype= 'application/json')
 
