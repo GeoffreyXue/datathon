@@ -3,6 +3,7 @@ from flask import request,session,jsonify,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import URL
 from sqlalchemy import MetaData
+from flask_cors import CORS
 
 import uuid
 
@@ -13,8 +14,9 @@ DBNAME ="datathon"
 PROJECT_ID ="geometric-rex-329215"
 INSTANCE_NAME ="datathon-db"
  
-app= Flask(__name__)
+app = Flask(__name__)
 app.secret_key = uuid.uuid4().hex
+CORS(app, resources={r"/*": {"origins": "*"}})
  
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{PASSWORD}@{PUBLIC_IP_ADDRESS}:3306/{DBNAME}"

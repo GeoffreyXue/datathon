@@ -1,31 +1,44 @@
 import {useEffect, useContext} from 'react';
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Spinner from 'react-bootstrap/Spinner';
 
 import LoginContext from './../../LoginContext';
+
+import './Home.css';
 
 function Home() {
     const [loggedIn, setLoggedIn] = useContext(LoginContext);
     
+    function checkSession() {
+        fetch("http://localhost:5000/checksession", {
+            method: 'GET'
+        })
+        .then((res) => res.json())
+        .then((res) => {
+            if (res.success) {
+                console.log("Auto-redirecting...")
+                setLoggedIn(true);
+                window.location.href = "http://localhost:3000/datathon/#/patients";
+            }
+            else {
+                console.log("No session found");
+                window.location.href = "http://localhost:3000/datathon/#/login";
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+
     useEffect(() => {
         setLoggedIn(false);
+        checkSession();
     }, []);
+
 
     return (
     <div className="Home">
-        <Container>
-            <Row>
-                <h1 className='m-3'>
-                    Healthcare Web App
-                    <hr/>
-                </h1>
-            </Row>
-            <Row>
-                <div>Login pls</div>
-            </Row>
-        </Container>
+        <Spinner animation="border" />
     </div>
     );
 }
