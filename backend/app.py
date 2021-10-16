@@ -14,6 +14,7 @@ import base64
 import matplotlib.image as mpimg
 import random
 import json
+from flask_cors import CORS
 # Google Cloud SQL (change this accordingly)
 PASSWORD ="cohen0731"
 PUBLIC_IP_ADDRESS ="35.224.73.35"
@@ -23,7 +24,7 @@ INSTANCE_NAME ="datathon-db"
  
 app= Flask(__name__)
 app.secret_key = uuid.uuid4().hex
- 
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{PASSWORD}@{PUBLIC_IP_ADDRESS}:3306/{DBNAME}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
