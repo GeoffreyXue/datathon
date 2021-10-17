@@ -18,18 +18,20 @@ function Patients() {
     const [fetching, setFetching] = useState(false);
 
     useEffect(() => {
-        getPatients();
+        getPatients(page);
     }, [])
 
-    function getPatients() {
+    function getPatients(pageNumber) {
         if (fetching) {
             return;
         }
 
         var data = {
-            pages: page
+            pages: pageNumber
         };
 
+        console.log(data)
+        setPage(pageNumber);
         setFetching(true);
 
         fetch("http://localhost:5000/page", {
@@ -41,9 +43,7 @@ function Patients() {
         })
         .then((res) => res.json())
         .then((res) => {
-            if (res.final == true) {
-                setHasMorePages(false);
-            }
+            setHasMorePages(res.final != true);
             setPatients(res.data);
         })
         .catch((err) => {
@@ -55,13 +55,11 @@ function Patients() {
     }
 
     function backPage() {
-        setPage(page - 1);
-        getPatients();
+        getPatients(page - 1);
     }
 
     function nextPage() {
-        setPage(page + 1);
-        getPatients();
+        getPatients(page + 1);
     }
 
     return (
