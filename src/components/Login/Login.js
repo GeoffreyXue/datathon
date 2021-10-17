@@ -29,6 +29,7 @@ function Login() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        login();
     }
 
     function login() {
@@ -91,7 +92,7 @@ function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             </Form.Group>
-                            <Button className="LoginButton" variant="dark" block size="lg" type="submit" disabled={!validateForm()} onClick={login}>
+                            <Button className="LoginButton" variant="dark" block size="lg" type="submit" disabled={!validateForm()}>
                                 {fetching ? 
                                     <div>
                                         <Spinner

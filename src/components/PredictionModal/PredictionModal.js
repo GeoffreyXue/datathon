@@ -8,9 +8,13 @@ import Modal from "react-bootstrap/Modal";
 import Toast from 'react-bootstrap/Toast';
 import "./PredictionModal.css";
 
+import ScheduleForm from './../ScheduleForm/ScheduleForm';
+
 function PredictionModal(props) {
+    const [schedule, setSchedule] = useState(false);
     const [show, setShow] = useState(false);
     const [sendingEmail, setSendingEmail] = useState(false);
+
 
     function sendAlert() {
         setSendingEmail(true);
@@ -18,6 +22,10 @@ function PredictionModal(props) {
             setSendingEmail(false);
             setShow(true);
         }, 2000);
+    }
+
+    function toggleSchedule() {
+        setSchedule(!schedule);
     }
 
     return (
@@ -54,8 +62,16 @@ function PredictionModal(props) {
                             <div>Alert Patient</div>
                         }
                     </Button>
-                    <Button variant="primary">Schedule</Button>
+                    <Button variant="primary" onClick={toggleSchedule}>{!schedule ? <>Schedule</> : <>↓</>}</Button>
                 </Modal.Footer>
+                {schedule ?
+                <Modal.Body>
+                    <ScheduleForm />
+                </Modal.Body> :
+                null
+                }
+                <Modal.Body>
+                </Modal.Body>
                 <div className="Toast">
                     <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
                         <Toast.Header>
