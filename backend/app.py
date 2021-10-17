@@ -243,8 +243,7 @@ def heartmodel(id):
                       epochs=80,
                       batch_size=10,
                       validation_split=0.2,
-                      shuffle=True,
-                      verbose=1)
+                      shuffle=True)
 
   return model.predict(df)
 
