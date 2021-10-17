@@ -15,9 +15,4 @@
     .LoginButton {
         min-width: calc(4vw + 100px);
     }
-
-    .Alert {
-        position: relative;
-        top: -67vh;
-    }
   }

@@ -37,7 +37,7 @@ function PatientCard(props) {
             <Card style={{ borderWidth: '5px', borderColor: `rgb(${patient.probability * 200}, 30, 30)` }}>
                 <div className='CardImage'>
                     <Card.Img 
-                        style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
+                        style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'cover', objectPosition: 'center' }}
                         variant="top" 
                         src={patient.img ? 'data:image/png;base64,' + patient.img : defaultPicture}/>
                 </div>
@@ -76,12 +76,12 @@ function PatientCard(props) {
                         <div className='StatCol'>
                             <img src={Activity} />
                             <div className="Stat">
-                                <div class="alignleft">Rest (BPM):</div>
-                                <b class="alignright">{patient.RestingBP}</b>
-                            </div> 
-                            <div className="Stat">
-                                <div class="alignleft">Max (BPM):</div>
+                                <div class="alignleft">Max HR:</div>
                                 <b class="alignright">{patient.MaxHR}</b>
+                            </div>
+                            <div className="Stat">
+                                <div class="alignleft">RBP (mg/dL):</div>
+                                <b class="alignright">{patient.RestingBP}</b>
                             </div> 
                             <div className="Stat">
                                 <div class="alignleft">Cho: (mg/dL):</div>

@@ -59,10 +59,11 @@ function Login() {
                 console.log("login fail");
                 setShowError(true);
             }
-            setFetching(false);
         })
         .catch((err) => {
             console.log(err);
+        })
+        .finally(() => {
             setFetching(false);
         });
     }
