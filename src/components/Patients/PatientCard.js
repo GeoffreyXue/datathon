@@ -34,7 +34,10 @@ function PatientCard(props) {
         <div className = "PatientCard">
             <Card border="dark" style={{ borderWidth: '5px' }}>
                 <div className='CardImage'>
-                    <Card.Img style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}variant="top" src={patient.img ?? defaultPicture}/>
+                    <Card.Img 
+                        style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
+                        variant="top" 
+                        src={patient.img ? 'data:image/png;base64,' + patient.img : defaultPicture}/>
                 </div>
                 <hr/>
                 <Card.Body>
