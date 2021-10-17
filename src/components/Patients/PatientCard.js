@@ -11,6 +11,8 @@ import Activity from './../../images/activity.svg';
 import PredictionModal from "./../PredictionModal/PredictionModal";
 import StatModal from './../StatModal/StatModal';
 
+import PredictionValue from "../PredictionModal/PredictionValue";
+
 import defaultPicture from "../../images/default.png";
 
 import './PatientCard.css';
@@ -32,7 +34,7 @@ function PatientCard(props) {
 
     return (
         <div className = "PatientCard">
-            <Card border="dark" style={{ borderWidth: '5px' }}>
+            <Card style={{ borderWidth: '5px', borderColor: `rgb(${patient.probability * 200}, 30, 30)` }}>
                 <div className='CardImage'>
                     <Card.Img 
                         style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
@@ -44,10 +46,10 @@ function PatientCard(props) {
                     <Card.Title>
                         <div className="StatTitle">
                             <div>{patient.Name ?? "Example"}</div>
-                        <div class="alignright">
-                            {patient.Sex == 'M' ? <GenderMale color="royalblue"/> :
-                                <GenderFemale color="hotpink"/>}
-                        </div>
+                            <div class="alignright">
+                                {patient.Sex == 'M' ? <GenderMale color="royalblue"/> : null }
+                                {patient.Sex == 'F' ? <GenderFemale color="hotpink"/> : null }
+                            </div>
                         </div>
                     </Card.Title>
                    
@@ -93,7 +95,7 @@ function PatientCard(props) {
                             More Stats
                         </Button>
                         <Button  variant="dark" onClick={handlePShow}>
-                            Run Prediction
+                            View Predictions
                         </Button>
                     </div>
                 </Card.Body>
