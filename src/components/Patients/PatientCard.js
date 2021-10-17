@@ -32,7 +32,7 @@ function PatientCard(props) {
 
     return (
         <div className = "PatientCard">
-            <Card border="secondary" style={{ borderWidth: '5px' }}>
+            <Card border="dark" style={{ borderWidth: '5px' }}>
                 <Card.Img className='CardImage' variant="top" src={banana}/>
                 <hr/>
                 <Card.Body>
@@ -84,10 +84,10 @@ function PatientCard(props) {
                     </div>
 
                     <div className="ButtonGrouping">
-                        <Button variant="secondary" onClick={handleSShow}>
+                        <Button variant="dark" onClick={handleSShow}>
                             More Stats
                         </Button>
-                        <Button  variant="secondary" onClick={handlePShow}>
+                        <Button  variant="dark" onClick={handlePShow}>
                             Run Prediction
                         </Button>
                     </div>

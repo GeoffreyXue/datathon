@@ -17,7 +17,7 @@ function Calendar() {
     
 
     return (
-        <Container>
+        <Container className="Calendar">
             <Row>
                 <h1 className='m-3'>
                     Calendar
@@ -25,13 +25,13 @@ function Calendar() {
                 </h1>
                 
             </Row>
-            <Row className="m-3">
+            <Row>
                 <Cal
                 localizer={localizer}
                 events={myEventsList}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: 500 }}
+                style={{ height: 600, width: '100%' }}
                 />
             </Row>
         </Container>

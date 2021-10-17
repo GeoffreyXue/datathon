@@ -4,9 +4,15 @@ import Button from "react-bootstrap/Button";
 import CloseButton from 'react-bootstrap/CloseButton';
 import ListGroup from "react-bootstrap/ListGroup";
 import Modal from "react-bootstrap/Modal";
+import Toast from 'react-bootstrap/Toast';
 import "./PredictionModal.css";
 
 function PredictionModal(props) {
+    const [show, setShow] = useState(false);
+
+    function sendAlert() {
+        setShow(true);
+    }
 
     return (
         <div className = "PredictionModal">
@@ -26,9 +32,15 @@ function PredictionModal(props) {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="danger">Alert</Button>
+                    <Button variant="danger" onClick={sendAlert}>Alert</Button>
                     <Button variant="primary">Schedule</Button>
                 </Modal.Footer>
+                <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
+                    <Toast.Header>
+                        <strong className="mr-auto">Sent Message</strong>
+                    </Toast.Header>
+                    <Toast.Body>Sent message to {props.patient.Name}</Toast.Body>
+                </Toast>
             </Modal>
         </div>
     );

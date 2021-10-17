@@ -33,7 +33,7 @@ function Experimental() {
             <br/>
             <Row>
                 <DropdownButton
-                variant="outline-secondary"
+                variant="outline-dark"
                 title={type}
                 >
                     <Dropdown.Item eventKey='Heart Disease' onSelect={setType}>Heart Disease</Dropdown.Item>

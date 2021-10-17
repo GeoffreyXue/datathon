@@ -76,7 +76,7 @@ function Patients() {
                     </h1>
                     <div className="Dropdown">
                         <DropdownButton
-                        variant="outline-secondary"
+                        variant="outline-dark"
                         title={type}
                         >
                             <Dropdown.Item eventKey='Heart Disease' onSelect={setType}>Heart Disease</Dropdown.Item>
@@ -98,12 +98,12 @@ function Patients() {
                 <Row>
                     <div className="Pagination">
                         {page > 1 ? 
-                            <Button className="Back" variant="outline-secondary" onClick={backPage}>
+                            <Button className="Back" variant="outline-dark" onClick={backPage}>
                                 Back
                             </Button> : <div/>
                         }
                         {hasMorePages ? 
-                            <Button className="Next" variant="outline-secondary" onClick={nextPage}>
+                            <Button className="Next" variant="outline-dark" onClick={nextPage}>
                                 Next
                             </Button> : null
                         }

@@ -79,12 +79,12 @@ function StatModal(props) {
                             <img className="StatImage" src={plots[selectedPlot]}/>
                             <div className="Pagination">
                             {selectedPlot > 0 ? 
-                                <Button className="Back" variant="outline-secondary" onClick={backPage}>
+                                <Button className="Back" variant="outline-dark" onClick={backPage}>
                                     Back
                                 </Button> : <div/>
                             }
                             {selectedPlot < plots.length - 1 ? 
-                                <Button className="Next" variant="outline-secondary" onClick={nextPage}>
+                                <Button className="Next" variant="outline-dark" onClick={nextPage}>
                                     Next
                                 </Button> : null
                             }
