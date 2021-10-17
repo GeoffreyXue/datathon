@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import CloseButton from 'react-bootstrap/CloseButton';
 import ListGroup from "react-bootstrap/ListGroup";
 import Modal from "react-bootstrap/Modal";
 import "./PredictionModal.css";
@@ -12,7 +13,7 @@ function PredictionModal(props) {
             <Modal show={props.show} onHide={props.handleClose}>
                 <Modal.Header>
                     <Modal.Title>Predictions</Modal.Title>
-                    <Button variant="secondary" onClick={props.handleClose}>Close</Button>
+                    <CloseButton onClick={props.handleClose} />
                 </Modal.Header>
 
                 <Modal.Body>

@@ -25,19 +25,16 @@ function Navigation() {
             <Navbar.Brand style={{height: '40px', lineHeight: '30px', textAlign: 'center'}}>LIFΞLIИΞ</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
                 {loggedIn ? 
-                <Nav className="me-auto">
+                    <>
                     <Nav.Link href="/datathon/#patients">Patients</Nav.Link>
                     <Nav.Link href="/datathon/#calendar">Calendar</Nav.Link>
                     <Nav.Link href="/datathon/#experimental">Experimental</Nav.Link>
+                    <Nav.Link href="/datathon/#">Logout</Nav.Link>
+                    </>
+                    : <Nav.Link href="/datathon/#login">Login</Nav.Link>}
                 </Nav> 
-                : null}
-                <Nav>
-                    {loggedIn ? 
-                    <Nav.Link href="/datathon/#">Logout</Nav.Link> :
-                    <Nav.Link href="/datathon/#login">Login</Nav.Link>
-                    }
-                </Nav>
             </Navbar.Collapse>
             </Container>
         </Navbar>

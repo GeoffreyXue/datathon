@@ -1,9 +1,29 @@
+
+.Split {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Dropdown {
+    display: grid;
+    place-items: center;
+}
+
 .PatientSet {
-    padding: 0 1vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
 }
 
 .Pagination {
-    padding: 2vh 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    padding: 2vh 0;
+}
+
+.Card {
+    margin: 2vw;
 }

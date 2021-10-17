@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import CloseButton from 'react-bootstrap/CloseButton';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import ListGroup from "react-bootstrap/ListGroup";
 import Modal from "react-bootstrap/Modal";
 import "./StatModal.css";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function StatModal(props) {
     const [plots, setPlots] = useState([]);
@@ -65,25 +69,22 @@ function StatModal(props) {
             <Modal show={props.show} onHide={props.handleClose} dialogClassName="modal-90w">
                 <Modal.Header>
                     <Modal.Title>Patient Statistics</Modal.Title>
-                    <Button variant="secondary" onClick={props.handleClose}>Close</Button>
+                    <CloseButton  onClick={props.handleClose}/>
                 </Modal.Header>
 
                 <Modal.Body>
-                    Statistics
                     <div>
                     {fetching ? <Spinner animation="border" /> :
                         <Container>
-                            <Row>
-                                <img src={plots[selectedPlot]}/>
-                            </Row>
+                            <img className="StatImage" src={plots[selectedPlot]}/>
                             <div className="Pagination">
                             {selectedPlot > 0 ? 
-                                <Button className="Back" variant="outline-secondary" block size="lg" onClick={backPage}>
+                                <Button className="Back" variant="outline-secondary" onClick={backPage}>
                                     Back
                                 </Button> : <div/>
                             }
                             {selectedPlot < plots.length - 1 ? 
-                                <Button className="Next" variant="outline-secondary" block size="lg" onClick={nextPage}>
+                                <Button className="Next" variant="outline-secondary" onClick={nextPage}>
                                     Next
                                 </Button> : null
                             }

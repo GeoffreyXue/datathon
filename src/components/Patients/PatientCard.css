@@ -5,7 +5,38 @@
 }
 
 .ButtonGrouping {
+    margin: 2vh 0 0 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.StatTitle {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.Stats {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: calc(1vw + 2px);
+}
+
+.StatCol {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.Stat {
+    padding: 0 1vw 0 0;
+}
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+    margin-left:auto;
+    margin-right:0;
 }
