@@ -10,6 +10,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
+import pandas as pd
 import io
 import base64
 import matplotlib.image as mpimg
@@ -148,10 +149,6 @@ def check_session():
 def logout():
     session.pop('username',None)
     return redirect(url_for('home'))
-
-
-import pandas as pd
-import numpy as np
 from sklearn import preprocessing
 from keras.models import Sequential
 from keras.layers import Dense
@@ -166,7 +163,6 @@ def heartmodel(id):
   obj = PersonalInfo.query.filter(PersonalInfo.ID == id).one()
   df = obj.__dict__
   print(df)
-  '''
   heart = pd.read_csv("heart_combined.csv")
   from sklearn.model_selection import train_test_split
   X_temp, X_test, y_temp, y_test = \
@@ -210,5 +206,4 @@ def heartmodel(id):
                       verbose=1)
 
   model.predict(X_test)
-'''
-    
+
