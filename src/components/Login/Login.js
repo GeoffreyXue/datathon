@@ -101,6 +101,7 @@ function Login() {
                                             role="status"
                                             aria-hidden="true"
                                         />
+                                        &nbsp;
                                         Loading... 
                                     </div> :
                                     <div>Login</div>

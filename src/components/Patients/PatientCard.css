@@ -23,7 +23,7 @@
         display: grid;
         width: 100%;
         grid-template-columns: repeat(2, 1fr);
-        font-size: calc(1vw + 2px);
+        font-size: calc(0.6vw + 0.4vh + 2px);
     }
     
     .StatCol {

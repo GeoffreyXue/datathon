@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Spinner from 'react-bootstrap/Spinner';
 import CloseButton from 'react-bootstrap/CloseButton';
 import ListGroup from "react-bootstrap/ListGroup";
 import Modal from "react-bootstrap/Modal";
@@ -9,9 +10,14 @@ import "./PredictionModal.css";
 
 function PredictionModal(props) {
     const [show, setShow] = useState(false);
+    const [sendingEmail, setSendingEmail] = useState(false);
 
     function sendAlert() {
-        setShow(true);
+        setSendingEmail(true);
+        setTimeout(() => {
+            setSendingEmail(false);
+            setShow(true);
+        }, 2000);
     }
 
     return (
@@ -32,7 +38,22 @@ function PredictionModal(props) {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="danger" onClick={sendAlert}>Alert</Button>
+                    <Button variant="danger" onClick={sendAlert}>
+                        {sendingEmail ? 
+                            <div>
+                                <Spinner
+                                    as="span"
+                                    animation="grow"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                />
+                                &nbsp;
+                                Sending Email... 
+                            </div> :
+                            <div>Alert Patient</div>
+                        }
+                    </Button>
                     <Button variant="primary">Schedule</Button>
                 </Modal.Footer>
                 <div className="Toast">
