@@ -10,23 +10,14 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
+import pandas as pd
 import io
 import base64
 import matplotlib.image as mpimg
 import random
 import simplejson as json
 from flask_cors import CORS
-import pandas as pd
-import keras
-import sklearn
-from sklearn import preprocessing
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.callbacks import EarlyStopping
-
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-import seaborn as sns
+from other import heartmodel
 '''
 Aiden was here  
 {\__/}
@@ -159,11 +150,21 @@ def check_session():
 def logout():
     session.pop('username',None)
     return redirect(url_for('home'))
-'''
+from sklearn import preprocessing
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.callbacks import EarlyStopping
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+import seaborn as sns
+
+
 def heartmodel(id):
   obj = PersonalInfo.query.filter(PersonalInfo.ID == id).one()
   df = obj.__dict__
   print(df)
+  '''
   heart = pd.read_csv("heart_combined.csv")
   from sklearn.model_selection import train_test_split
   X_temp, X_test, y_temp, y_test = \
@@ -208,4 +209,4 @@ def heartmodel(id):
 
   model.predict(X_test)
 '''
-    
+heartmodel(1)
