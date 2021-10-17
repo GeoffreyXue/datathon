@@ -22,7 +22,7 @@ function Navigation() {
                 className="d-inline-block align-top"
                 alt='lifeline'
             />
-            <Navbar.Brand style={{height: '40px', lineHeight: '40px', textAlign: 'center'}}>LIFΞLIИΞ</Navbar.Brand>
+            <Navbar.Brand style={{height: '40px', lineHeight: '30px', textAlign: 'center'}}>LIFΞLIИΞ</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 {loggedIn ? 
