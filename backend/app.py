@@ -80,7 +80,7 @@ def plotting():
     for i in lists:
         if(type(i[1]) == float):
             package = [dicts[i[0]], i[1]]
-            rgb = [(random.uniform(0, 0.8), random.uniform(0, 0.8), random.uniform(0, 0.8)) for i in range(2)]
+            rgb = [(random.random(), random.random(), random.random()) for i in range(2)]
             plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
             ax = plt.bar([person, "Average"],package,align='center', color=rgb)
             plt.title(i[0])
@@ -94,7 +94,7 @@ def plotting():
             total = i[1].pop("total")
             
             package = [[a,b] for a,b in i[1].items()]
-            rgb = [(random.uniform(0, 0.8), random.uniform(0, 0.8), random.uniform(0, 0.8)) for k in range(len(i[1]))]
+            rgb = [(random.random(),random.random(),random.random()) for k in range(len(i[1]))]
             labels = []
             x = []
             for j in package:
@@ -122,9 +122,10 @@ def page():
     pages = request.json.get('pages')
     lists = PersonalInfo.query.filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
     good = [i.as_dict() for i in lists]
-
+    for i in good:
+        i["probability"] = heartmodel(i["ID"])
     res = {
-        'data': good,
+        'data': [good],
         'final': False
     }
 
@@ -166,12 +167,44 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 import seaborn as sns
 
+from copy import deepcopy,copy
 
 def heartmodel(id):
   obj = PersonalInfo.query.filter(PersonalInfo.ID == id).one()
-  df = obj.__dict__
+  dicts = deepcopy(obj.__dict__)
+  heart1 = pd.read_csv("heart.csv")
+  heart2 = pd.read_csv("heart2.csv")
+  del heart2['ca']
+  del heart2['thal']
+  heart2 = heart2[['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs','restecg', 'thalach', 'exang','oldpeak','slope', 'target']]
+
+  heart2.columns = ['Age', 'Sex', 'ChestPainType', 'RestingBP', 'Cholesterol', 'FastingBS',
+       'RestingECG', 'MaxHR', 'ExerciseAngina', 'Oldpeak', 'ST_Slope',
+       'HeartDisease']
+  for i in obj.__dict__.keys():
+      if not i in heart2.columns:
+          dicts.pop(i)
+  df = {i : [j] for i,j in dicts.items()}
+  df = pd.DataFrame.from_dict(df)
+  df = df[heart1.columns]
   print(df)
+  df["unique"] = 1
+  heart1["unique"] = 0
+  heart1 = heart1.append(df)
+  le = preprocessing.LabelEncoder()
+  for i in heart1.columns:
+      if(heart1[i].dtype == object):
+        encode = le.fit_transform(heart1[i])
+        heart1[i] = encode
+  df = heart1.loc[heart1["unique"] == 1]
+  del heart1["unique"]
+  with open("heart_combined.csv","w") as files:
+      heart1 = heart1.append(heart2)
+      heart1.to_csv(files)
   heart = pd.read_csv("heart_combined.csv")
+  df = np.array(df[df.columns[:11]])
+  x = np.array(heart[heart.columns[:11]])
+  y = np.array(heart.loc[:, 'HeartDisease'])
   from sklearn.model_selection import train_test_split
   X_temp, X_test, y_temp, y_test = \
   train_test_split(x, y, test_size=0.3, shuffle=True, random_state=1, stratify=y)
@@ -213,15 +246,7 @@ def heartmodel(id):
                       shuffle=True,
                       verbose=1)
 
-  model.predict(X_test)
-
-from sklearn import preprocessing
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.callbacks import EarlyStopping
-
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
+  return model.predict(df)
 
 def breastmodel(id):
     heart = pd.read_csv("heart_combined.csv")
@@ -273,3 +298,4 @@ def breastmodel(id):
     model.predict(X_test)
 
     np.round(model.predict(X_test),0)
+heartmodel(1)
