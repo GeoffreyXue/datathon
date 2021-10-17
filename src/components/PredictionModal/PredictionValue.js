@@ -18,7 +18,7 @@ function PredictionValue(props) {
             strokeLinecap: "round",
 
             // Text size
-            textSize: "16px",
+            // textSize: "16px",
 
             // How long animation takes to go from one percentage to another, in seconds
             pathTransitionDuration: 2,
