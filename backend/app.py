@@ -121,12 +121,16 @@ def page():
     pages = request.json.get('pages')
     lists = PersonalInfo.query.filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
     good = [i.as_dict() for i in lists]
+
+    res = {
+        'data': good,
+        'final': False
+    }
+
     if((pages)*3 >= PersonalInfo.query.count()):
-        good.append({"final" : True})
-    else:
-        good.append({"final" : False})
+        res['final'] = True
     
-    return Response(json.dumps(good, use_decimal=True), mimetype= 'application/json')
+    return Response(json.dumps(res, use_decimal=True), mimetype= 'application/json')
 
 @app.route('/')
 def home():

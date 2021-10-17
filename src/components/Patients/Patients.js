@@ -41,12 +41,10 @@ function Patients() {
         })
         .then((res) => res.json())
         .then((res) => {
-            if (res[0].final == true) {
-                setPage(1);
-                getPatients();
-                return;
+            if (res.final == true) {
+                setHasMorePages(false);
             }
-            setPatients(res);
+            setPatients(res.data);
         })
         .catch((err) => {
             console.log(err);
