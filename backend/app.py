@@ -202,17 +202,15 @@ def heartmodel(IDS):
   heart1["unique"] = 0
   hearttest = filters(heart1.append(df))
   heart1 = filters(heart1)
-  df = hearttest.loc[heart1["unique"] == 1]
+  df = hearttest.loc[hearttest["unique"] == 1]
   del heart1["unique"]
   del df["unique"]
-
   with open("heart_combined.csv","w") as files:
       heart1 = heart1.append(heart2)
-      heart1.to_csv(files)
-  heart = pd.read_csv("heart_combined.csv")
-  df = df.reindex(columns=heart.columns)
-  df = np.array(df[heart.columns[:11]])
-  print(df)
+      heart1.to_csv(files, header = heart1.columns)
+  heart = pd.read_csv("heart_combined.csv", index_col=0)
+  df = np.array(df[df.columns[:11]])
+  df = df.astype(float)
   x = np.array(heart[heart.columns[:11]])
   y = np.array(heart.loc[:, 'HeartDisease'])
   from sklearn.model_selection import train_test_split
@@ -257,7 +255,7 @@ def heartmodel(IDS):
                       verbose=0)
 
   users = PersonalInfo.query.filter(PersonalInfo.ID == IDS).one()
-  users.probability = model.predict(df)[0][0]
+  users.probability = round(model.predict(df)[0][0],5)
   db.session.commit()
 def breastmodel(IDS):
     if(IDS == None):
@@ -314,3 +312,5 @@ def breastmodel(IDS):
 if __name__ == "__main__":
     for i in PersonalInfo.query.all():
         heartmodel(i.__dict__.get("ID"))
+    for i in PersonalInfo.query.all():
+        print(i.__dict__.get("probability"))
