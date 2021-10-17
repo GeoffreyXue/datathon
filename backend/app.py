@@ -71,10 +71,8 @@ def plotting():
     dicts = obj.__dict__
     b64 = []
     for i in lists:
-        print(i[0])
         if(type(i[1]) == float):
             package = [dicts[i[0]], i[1]]
-            print(package)
             rgb = [(random.random(), random.random(), random.random()) for i in range(2)]
             plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
             ax = plt.bar([person, "Average"],package,align='center', color=rgb)
@@ -86,7 +84,28 @@ def plotting():
             b64.append(my_base64_jpgData)
             plt.close() 
         else:
-            pass
+            total = i[1].pop("total")
+            
+            package = [[a,b] for a,b in i[1].items()]
+            rgb = [(random.random(),random.random(),random.random()) for k in range(len(i[1]))]
+            labels = []
+            x = []
+            for j in package:
+                if(j[0] == dicts.get(i[0], None)):
+                    labels.append(j[0] + "*")
+                    x.append(j[1])
+                else:
+                    x.append(j[1])
+                    labels.append(j[0])
+            plt.pie(x,labels = labels, colors=rgb)
+            plt.show()
+            my_stringIObytes = io.BytesIO()
+            plt.savefig(my_stringIObytes, format='jpg')
+            my_stringIObytes.seek(0)
+            my_base64_jpgData = base64.b64encode(my_stringIObytes.read()).decode('utf-8')
+            b64.append(my_base64_jpgData)
+            plt.close() 
+            
     return Response(json.dumps(b64),  mimetype='application/json')
 
 @app.route('/page', methods=['POST'])
