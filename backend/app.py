@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from collections import defaultdict
 import uuid
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import io
@@ -81,7 +81,7 @@ def plotting():
             rgb = [(random.random(), random.random(), random.random()) for i in range(2)]
             plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
             ax = plt.bar([person, "Average"],package,align='center', color=rgb)
-            plt.ylabel(i[0])
+            plt.title(i[0])
             my_stringIObytes = io.BytesIO()
             plt.savefig(my_stringIObytes, format='jpg')
             my_stringIObytes.seek(0)
@@ -104,7 +104,6 @@ def plotting():
                     labels.append(j[0])
             plt.pie(x,labels = labels, colors=rgb)
             plt.title(i[0])
-            plt.show()
             my_stringIObytes = io.BytesIO()
             plt.savefig(my_stringIObytes, format='jpg')
             my_stringIObytes.seek(0)
