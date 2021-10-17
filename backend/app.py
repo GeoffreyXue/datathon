@@ -49,7 +49,7 @@ class PersonalInfo(db.Model):
     __table__ = Table('PersonalInfo', meta, autoload = True, autoload_with=db.engine)
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
+       
 def averages(rows):
     lisd = []
     for j in rows[0].__dict__.keys():
