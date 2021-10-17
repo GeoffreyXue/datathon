@@ -169,6 +169,14 @@ import seaborn as sns
 
 from copy import deepcopy,copy
 
+
+def filters(df):
+    le = preprocessing.LabelEncoder()
+    for i in df.columns:
+      if(df[i].dtype == object):
+        encode = le.fit_transform(df[i])
+        df[i] = encode
+    return df
 def heartmodel(IDS):
   if(IDS == None):
       return
@@ -192,19 +200,19 @@ def heartmodel(IDS):
   
   df["unique"] = 1
   heart1["unique"] = 0
-  heart1 = heart1.append(df)
-  le = preprocessing.LabelEncoder()
-  for i in heart1.columns:
-      if(heart1[i].dtype == object):
-        encode = le.fit_transform(heart1[i])
-        heart1[i] = encode
-  df = heart1.loc[heart1["unique"] == 1]
+  hearttest = filters(heart1.append(df))
+  heart1 = filters(heart1)
+  df = hearttest.loc[heart1["unique"] == 1]
   del heart1["unique"]
+  del df["unique"]
+
   with open("heart_combined.csv","w") as files:
       heart1 = heart1.append(heart2)
       heart1.to_csv(files)
   heart = pd.read_csv("heart_combined.csv")
-  df = np.array(df[df.columns[:11]])
+  df = df.reindex(columns=heart.columns)
+  df = np.array(df[heart.columns[:11]])
+  print(df)
   x = np.array(heart[heart.columns[:11]])
   y = np.array(heart.loc[:, 'HeartDisease'])
   from sklearn.model_selection import train_test_split
