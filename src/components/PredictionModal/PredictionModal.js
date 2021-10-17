@@ -26,6 +26,7 @@ function PredictionModal(props) {
         setSendingEmail(true);
         setTimeout(() => {
             setSendingEmail(false);
+            setMessage("");
             setShow(true);
         }, 2000);
     }

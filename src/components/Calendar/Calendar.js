@@ -5,16 +5,15 @@ import Row from "react-bootstrap/Row";
 import { Calendar as Cal, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 
+import events from "./events";
+
 import "./Calendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+
 const localizer = momentLocalizer(moment)
 
-const myEventsList = [];
-
 function Calendar() {
-
-    
 
     return (
         <Container className="Calendar">
@@ -28,10 +27,10 @@ function Calendar() {
             <Row>
                 <Cal
                 localizer={localizer}
-                events={myEventsList}
+                events={events}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: 500, width: '100%' }}
+                style={{ height: 600, width: '100%' }}
                 />
             </Row>
         </Container>
