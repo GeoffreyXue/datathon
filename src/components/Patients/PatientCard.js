@@ -11,7 +11,7 @@ import Activity from './../../images/activity.svg';
 import PredictionModal from "./../PredictionModal/PredictionModal";
 import StatModal from './../StatModal/StatModal';
 
-import banana from "../../images/banana.jpg";
+import defaultPicture from "../../images/default.png";
 
 import './PatientCard.css';
 
@@ -33,7 +33,9 @@ function PatientCard(props) {
     return (
         <div className = "PatientCard">
             <Card border="dark" style={{ borderWidth: '5px' }}>
-                <Card.Img className='CardImage' variant="top" src={banana}/>
+                <div className='CardImage'>
+                    <Card.Img style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}variant="top" src={patient.img ?? defaultPicture}/>
+                </div>
                 <hr/>
                 <Card.Body>
                     <Card.Title>
