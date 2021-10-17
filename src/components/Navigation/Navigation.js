@@ -1,6 +1,6 @@
 import {useState, useContext} from 'react';
 
-import {Redirect} from 'react-router-dom';
+import icon from '../../images/icon.svg';
 
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
@@ -15,14 +15,21 @@ function Navigation() {
     return (
         <Navbar bg="dark" variant="dark" sticky="top">
             <Container>
-            <Navbar.Brand>Healthcare Webapp</Navbar.Brand>
+            <img
+                src={icon}
+                width='35'
+                height='35'
+                className="d-inline-block align-top"
+                alt='lifeline'
+            />
+            <Navbar.Brand style={{height: '40px', lineHeight: '40px', textAlign: 'center'}}>LIFΞLIИΞ</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 {loggedIn ? 
                 <Nav className="me-auto">
                     <Nav.Link href="/datathon/#patients">Patients</Nav.Link>
                     <Nav.Link href="/datathon/#calendar">Calendar</Nav.Link>
-                    <Nav.Link href="/datathon/#interactive">Interactive</Nav.Link>
+                    <Nav.Link href="/datathon/#experimental">Experimental</Nav.Link>
                 </Nav> 
                 : null}
                 <Nav>
