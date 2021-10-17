@@ -39,8 +39,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]= True
 db = SQLAlchemy(app)
 db.init_app(app)
 meta = MetaData()
-Session = sessionmaker(bind = db.engine)
-sessions = Session()
 class Test(db.Model):
     pid = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -127,7 +125,7 @@ def page():
     lists = PersonalInfo.query.filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
     good = [i.as_dict() for i in lists]
     res = {
-        'data': [good],
+        'data': good,
         'final': False
     }
 
@@ -252,7 +250,6 @@ def heartmodel(IDS):
 
   users = PersonalInfo.query.filter(PersonalInfo.ID == IDS).one()
   users.probability = model.predict(df)[0][0]
-  print(users.probability)
   db.session.commit()
 def breastmodel(IDS):
     if(IDS == None):
@@ -301,14 +298,11 @@ def breastmodel(IDS):
                         batch_size=10,
                         validation_split=0.2,
                         shuffle=True,
-                        verbose=1)
+                        verbose=0)
 
     model.predict(X_test)
     np.round(model.predict(X_test),0)
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     for i in PersonalInfo.query.all():
-        print(i.__dict__.get("ID",None))
         heartmodel(i.__dict__.get("ID"))
-    for i in PersonalInfo.query.all():
-        
-        print(i.__dict__['probability'])
