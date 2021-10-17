@@ -31,11 +31,11 @@ function PatientCard(props) {
                 <Card.Img className='CardImage' variant="top" src={banana}/>
                 <hr/>
                 <Card.Body>
-                    <Card.Title>{patient.name ?? "Example"}</Card.Title>
+                    <Card.Title>{patient.Name ?? "Example"}</Card.Title>
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Age: {patient.age ?? 20}</ListGroup.Item>
+                        <ListGroup.Item>Age: {patient.Age ?? 20}</ListGroup.Item>
                         <ListGroup.Item>Height: {patient.height ?? 160} in</ListGroup.Item>
-                        <ListGroup.Item>Weight: {patient.weight ?? 150} lb</ListGroup.Item>
+                        <ListGroup.Item>Weight: {patient.Weight ?? 150} lb</ListGroup.Item>
                     </ListGroup>
                     
                     <div className="ButtonGrouping">
