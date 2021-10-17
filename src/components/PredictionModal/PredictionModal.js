@@ -31,7 +31,7 @@ function PredictionModal(props) {
     function toggleSchedule() {
         setSchedule(!schedule);
     }
-    
+
     return (
         <div className = "PredictionModal">
             <Modal show={props.show} onHide={props.handleClose}>
@@ -42,7 +42,7 @@ function PredictionModal(props) {
 
                 <Modal.Body>
                     Heart Disease
-                    <PredictionValue chance={0.26} />
+                    <PredictionValue chance={props.patient.probability} />
                     Breast Cancer
                     <PredictionValue chance={0.84} />
                 </Modal.Body>
