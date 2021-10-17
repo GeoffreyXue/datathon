@@ -11,10 +11,8 @@
 # production
 /build
 
-# pycache
-/backend/__pycache__
-
 # misc
+.pyc
 .DS_Store
 .env.local
 .env.development.local
