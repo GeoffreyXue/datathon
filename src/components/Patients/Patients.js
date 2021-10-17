@@ -30,7 +30,6 @@ function Patients() {
             pages: pageNumber
         };
 
-        console.log(data)
         setPage(pageNumber);
         setFetching(true);
 
@@ -45,6 +44,7 @@ function Patients() {
         .then((res) => {
             setHasMorePages(res.final != true);
             setPatients(res.data);
+            console.log(res.data);
         })
         .catch((err) => {
             console.log(err);
@@ -88,7 +88,7 @@ function Patients() {
                 <>
                 <Row className="PatientSet g-4">
                     {patients.map((patient, index) => (
-                        <PatientCard key={index} patient={patient}/>
+                        <PatientCard key={index} type={type} patient={patient}/>
                     ))}
                 </Row>
                 <Row>

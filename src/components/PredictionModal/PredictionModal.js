@@ -5,6 +5,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import CloseButton from 'react-bootstrap/CloseButton';
 import ListGroup from "react-bootstrap/ListGroup";
 import Modal from "react-bootstrap/Modal";
+import Form from 'react-bootstrap/Form';
 import Toast from 'react-bootstrap/Toast';
 import "./PredictionModal.css";
 
@@ -16,6 +17,7 @@ function PredictionModal(props) {
     const [schedule, setSchedule] = useState(false);
     const [show, setShow] = useState(false);
     const [sendingEmail, setSendingEmail] = useState(false);
+    const [message, setMessage] = useState("");
 
     const [fetching, setFetching] = useState(false);
 
@@ -24,6 +26,7 @@ function PredictionModal(props) {
         setSendingEmail(true);
         setTimeout(() => {
             setSendingEmail(false);
+            setMessage("");
             setShow(true);
         }, 2000);
     }
@@ -34,7 +37,7 @@ function PredictionModal(props) {
 
     return (
         <div className = "PredictionModal">
-            <Modal show={props.show} onHide={props.handleClose}>
+            <Modal show={props.show} onHide={props.handleClose} >
                 <Modal.Header>
                     <Modal.Title>Predictions</Modal.Title>
                     <CloseButton onClick={props.handleClose} />
@@ -43,18 +46,34 @@ function PredictionModal(props) {
                 <Modal.Body>
                     <div className="Predictions">
                         <div className="Prediction">
-                            <div>Heart Disease</div>
-                            <PredictionValue chance={props.patient.probability} />
+                            <div>Heart Disease Risk</div>
+                            <PredictionValue chance={props.patient.HeartDisease} />
                         </div>
                         <div className="Prediction">
-                            <div>Breast Cancer</div>
-                            <PredictionValue chance={Math.random()} />
+                            <div>Breast Cancer Risk</div>
+                            <PredictionValue chance={props.patient.CancerProbability} />
                         </div>
                     </div>
+                    <br/>
+                    {props.patient.HeartDisease > 0.5 || props.patient.CancerProbability > 0.5 ?
+                    <div className="Message">
+                        <h3>Message</h3>
+                        <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>Give recommendations, ask to schedule an appointment, etc.</Form.Label>
+                            <Form.Control 
+                                as="textarea" 
+                                rows={3} 
+                                onChange={(e) => {setMessage(e.target.value)}}
+                            />
+                        </Form.Group>
+                        </Form>
+                    </div> : null }
 
                 </Modal.Body>
 
                 <Modal.Footer>
+                    {props.patient.HeartDisease > 0.5 || props.patient.CancerProbability > 0.5 ?
                     <Button variant="danger" onClick={sendAlert}>
                         {sendingEmail ? 
                             <div>
@@ -68,9 +87,9 @@ function PredictionModal(props) {
                                 &nbsp;
                                 Sending Email... 
                             </div> :
-                            <div>Alert Patient</div>
+                            <div>Message Patient</div>
                         }
-                    </Button>
+                    </Button> : null }
                     <Button variant="primary" onClick={toggleSchedule}>{!schedule ? <>Schedule</> : <>↓</>}</Button>
                 </Modal.Footer>
                 {schedule ?

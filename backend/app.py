@@ -80,16 +80,17 @@ def averages(rows):
 def averages2(dict_array):
     lisd = []
     for j in dict_array[0].keys():
+        print(j)
         avg = 0
         classify = defaultdict(int)
         dicts = dict_array[0]
         if((type(dicts[j]) == int or type(dicts[j]) == float) and j != 'ID'):
             for i in dict_array:
-                avg += dict_array[i][j]
+                avg += i[j]
             lisd.append([j, avg/len(dict_array)])
         elif(type(dicts[j]) == str and j != "Name"):
             for i in dict_array:
-                classify[dict_array[i][j]] += 1
+                classify[i[j]] += 1
             classify["total"] = len(dict_array)
             lisd.append([j, classify])
     return lisd
@@ -112,17 +113,20 @@ def plotting():
     # gets one person column
     obj = []
     for x, y, z in db.session.query(PersonInfo, PersonBreastCancer, PersonHeartDisease) \
-            .filter(PersonInfo.ID == PersonBreastCancer.id, PersonInfo.ID == PersonHeartDisease.id).one():
+            .filter(PersonInfo.Name == person, PersonInfo.ID == PersonBreastCancer.id, PersonInfo.ID == PersonHeartDisease.id).all():
         x.__dict__.update(y.__dict__)
         x.__dict__.update(z.__dict__)
-        obj = x
-    dicts = obj.__dict__
+        obj = x.__dict__
+    dicts = obj
     b64 = []
     for i in lists:
         if(type(i[1]) == float):
             package = [dicts[i[0]], i[1]]
             rgb = [(random.random(), random.random(), random.random()) for i in range(2)]
-            plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
+            try:
+                plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
+            except:
+                continue
             ax = plt.bar([person, "Average"],package,align='center', color=rgb)
             plt.title(i[0])
             my_stringIObytes = io.BytesIO()
@@ -161,8 +165,20 @@ def page():
     if(not request.json.get('pages', None)):
         return jsonify(success = False)
     pages = request.json.get('pages')
-    lists = PersonInfo.query.filter(PersonInfo.ID > 3*(pages-1), PersonInfo.ID <= (pages) * 3  )
-    good = [i.as_dict() for i in lists]
+    lists = []
+    for x, y, z in db.session.query(PersonInfo, PersonBreastCancer, PersonHeartDisease) \
+            .filter(PersonInfo.ID > 3*(pages-1), \
+                PersonInfo.ID <= (pages) * 3, \
+                PersonInfo.ID == PersonBreastCancer.id, \
+                PersonInfo.ID == PersonHeartDisease.id) \
+            .all():
+        hello = x.as_dict()
+        hello.update(y.as_dict())
+        hello.update(z.as_dict())
+
+        lists.append(hello)
+    
+    good = lists 
     res = {
         'data': good,
         'final': False
@@ -257,7 +273,7 @@ def heartmodel(IDS):
     heart = pd.read_csv("heart_combined.csv", index_col=0)
     df = np.array(df[df.columns[:11]])
     df = df.astype(float)
-    print(df)
+    # print(df)
     x = np.array(heart[heart.columns[:11]])  
     y = np.array(heart1.loc[:, 'HeartDisease'])
     from sklearn.model_selection import train_test_split
@@ -298,12 +314,12 @@ def heartmodel(IDS):
                       shuffle=True,
                       verbose=0)
     
-    print("MODEL PREDICTION")
-    print(model.predict(df)[0][0])
+    # print("MODEL PREDICTION")
+    # print(model.predict(df)[0][0])
 
     user = PersonHeartDisease.query.filter(PersonHeartDisease.id == IDS).one()
-    print("USER")
-    print(user.__dict__)
+    # print("USER")
+    # print(user.__dict__)
     user.DiseaseProbability = model.predict(df)[0][0]
     db.session.commit()
 
@@ -393,22 +409,18 @@ def breastmodel(IDS):
 
     # model.predict(X_test)
     # np.round(model.predict(X_test),0)
-    print("MODEL PREDICTION")
-    print(model.predict(df)[0][0])
+    # print("MODEL PREDICTION")
+    # print(model.predict(df)[0][0])
     user = PersonBreastCancer.query.filter(PersonBreastCancer.id == IDS).one()
-    print("USER")
-    print(user.__dict__)
+    # print("USER")
+    # print(user.__dict__)
     user.CancerProbability = model.predict(df)[0][0]
     db.session.commit()
 
 if __name__ == "__main__":
-    heartmodel(1)
-    # for i in PersonInfo.query.all():
-    #     print(i.__dict__.get("ID"))
-    
     for i in PersonInfo.query.all():
-        #heartmodel(i.ID)
-        pass
+        heartmodel(i.ID)
+
     for i in PersonInfo.query.all():
         breastmodel(i.ID)
     
