@@ -31,7 +31,7 @@ function Calendar() {
                 events={myEventsList}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: 600, width: '100%' }}
+                style={{ height: 500, width: '100%' }}
                 />
             </Row>
         </Container>
