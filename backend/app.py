@@ -80,7 +80,7 @@ def plotting():
     for i in lists:
         if(type(i[1]) == float):
             package = [dicts[i[0]], i[1]]
-            rgb = [(random.random(), random.random(), random.random()) for i in range(2)]
+            rgb = [(random.uniform(0, 0.8), random.uniform(0, 0.8), random.uniform(0, 0.8)) for i in range(2)]
             plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
             ax = plt.bar([person, "Average"],package,align='center', color=rgb)
             plt.title(i[0])
@@ -94,7 +94,7 @@ def plotting():
             total = i[1].pop("total")
             
             package = [[a,b] for a,b in i[1].items()]
-            rgb = [(random.random(),random.random(),random.random()) for k in range(len(i[1]))]
+            rgb = [(random.uniform(0, 0.8), random.uniform(0, 0.8), random.uniform(0, 0.8)) for k in range(len(i[1]))]
             labels = []
             x = []
             for j in package:
