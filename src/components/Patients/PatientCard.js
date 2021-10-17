@@ -76,12 +76,12 @@ function PatientCard(props) {
                         <div className='StatCol'>
                             <img src={Activity} />
                             <div className="Stat">
-                                <div class="alignleft">Rest (BPM):</div>
-                                <b class="alignright">{patient.RestingBP}</b>
-                            </div> 
-                            <div className="Stat">
-                                <div class="alignleft">Max (BPM):</div>
+                                <div class="alignleft">Max HR:</div>
                                 <b class="alignright">{patient.MaxHR}</b>
+                            </div>
+                            <div className="Stat">
+                                <div class="alignleft">RBP (mg/dL):</div>
+                                <b class="alignright">{patient.RestingBP}</b>
                             </div> 
                             <div className="Stat">
                                 <div class="alignleft">Cho: (mg/dL):</div>
