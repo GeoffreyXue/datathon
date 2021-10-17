@@ -62,7 +62,7 @@ function ScheduleForm() {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <h1>Schedule</h1>
+            <h4>Schedule</h4>
             <Form.Group size="lg" controlId="start">
             <Form.Label style={{display: 'block'}}>Start Time</Form.Label>
             <DateTimePicker
