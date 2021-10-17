@@ -4,3 +4,11 @@
     bottom: -100px;
     right: 0px;
 }
+
+.Predictions {
+    display: flex;
+}
+
+.Prediction {
+    margin: 0 5px;
+}

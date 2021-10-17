@@ -88,7 +88,7 @@ function Patients() {
                 <>
                 <Row className="PatientSet g-4">
                     {patients.map((patient, index) => (
-                        <PatientCard key={index} patient={patient}/>
+                        <PatientCard key={index} type={type} patient={patient}/>
                     ))}
                 </Row>
                 <Row>

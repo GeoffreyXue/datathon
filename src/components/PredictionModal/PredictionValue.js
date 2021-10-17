@@ -6,10 +6,23 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 function PredictionValue(props) {
+
+    function determineText() {
+        if (props.chance > 0.75) {
+            return 'Very High';
+        } else if (props.chance > 0.5) {
+            return 'High';
+        } else if (props.chance > 0.25) {
+            return 'Medium';
+        } else {
+            return 'Low';
+        }
+    }
+
     return (
         <CircularProgressbar
         value={Math.round(props.chance * 10000) / 100}
-        text={`${Math.round(props.chance * 10000) / 100}%`}
+        text={determineText()}
         styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
             rotation: 0,
@@ -18,7 +31,7 @@ function PredictionValue(props) {
             strokeLinecap: "round",
 
             // Text size
-            // textSize: "16px",
+            textSize: "16px",
 
             // How long animation takes to go from one percentage to another, in seconds
             pathTransitionDuration: 2,

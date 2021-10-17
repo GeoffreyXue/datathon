@@ -32,9 +32,64 @@ function PatientCard(props) {
     const handleSClose = () => setSShow(false);
     const handleSShow = () => setSShow(true);
 
+    function generateUniqueStats() {
+        switch(props.type) {
+            case 'Breast Cancer':
+                return (
+                    <div className='StatCol'>
+                        <img src={Activity} />
+                        <div className="Stat">
+                            <div class="alignleft">Radius:</div>
+                            <b class="alignright">{patient.radius_worst}</b>
+                        </div>
+                        <div className="Stat">
+                            <div class="alignleft">Texture:</div>
+                            <b class="alignright">{patient.texture_worst}</b>
+                        </div> 
+                        <div className="Stat">
+                            <div class="alignleft">Symmetry:</div>
+                            <b class="alignright">{patient.symmetry_se}</b>
+                        </div>
+                    </div>
+                );
+                break;
+            case 'Heart Disease':
+            default:
+                return (
+                    <div className='StatCol'>
+                        <img src={Activity} />
+                        <div className="Stat">
+                            <div class="alignleft">Max HR:</div>
+                            <b class="alignright">{patient.MaxHR}</b>
+                        </div>
+                        <div className="Stat">
+                            <div class="alignleft">RBP (mg/dL):</div>
+                            <b class="alignright">{patient.RestingBP}</b>
+                        </div> 
+                        <div className="Stat">
+                            <div class="alignleft">Cho: (mg/dL):</div>
+                            <b class="alignright">{patient.Cholesterol}</b>
+                        </div>
+                    </div>
+                );
+        }
+    }
+
+    function getBorderProbability() {
+        switch(props.type) {
+            case 'Breast Cancer':
+                return patient.CancerProbability;
+            case 'Heart Disease':
+                return patient.HeartDisease;
+            default:
+                return 0;
+
+        }
+    }
+
     return (
         <div className = "PatientCard">
-            <Card style={{ borderWidth: '5px', borderColor: `rgb(${patient.probability * 200}, 30, 30)` }}>
+            <Card style={{ borderWidth: '5px', borderColor: `rgb(${getBorderProbability() * 200}, 30, 30)` }}>
                 <div className='CardImage'>
                     <Card.Img 
                         style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'cover', objectPosition: 'center' }}
@@ -73,21 +128,7 @@ function PatientCard(props) {
                                 <b class="alignright">{patient.bodyWeight}</b>
                             </div> 
                         </div>
-                        <div className='StatCol'>
-                            <img src={Activity} />
-                            <div className="Stat">
-                                <div class="alignleft">Max HR:</div>
-                                <b class="alignright">{patient.MaxHR}</b>
-                            </div>
-                            <div className="Stat">
-                                <div class="alignleft">RBP (mg/dL):</div>
-                                <b class="alignright">{patient.RestingBP}</b>
-                            </div> 
-                            <div className="Stat">
-                                <div class="alignleft">Cho: (mg/dL):</div>
-                                <b class="alignright">{patient.Cholesterol}</b>
-                            </div> 
-                        </div>
+                        {generateUniqueStats()}
                     </div>
 
                     <div className="ButtonGrouping">
