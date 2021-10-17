@@ -8,12 +8,16 @@ import Modal from "react-bootstrap/Modal";
 import Toast from 'react-bootstrap/Toast';
 import "./PredictionModal.css";
 
+import PredictionValue from "./PredictionValue";
+
 import ScheduleForm from './../ScheduleForm/ScheduleForm';
 
 function PredictionModal(props) {
     const [schedule, setSchedule] = useState(false);
     const [show, setShow] = useState(false);
     const [sendingEmail, setSendingEmail] = useState(false);
+
+    const [fetching, setFetching] = useState(false);
 
 
     function sendAlert() {
@@ -27,7 +31,7 @@ function PredictionModal(props) {
     function toggleSchedule() {
         setSchedule(!schedule);
     }
-
+    
     return (
         <div className = "PredictionModal">
             <Modal show={props.show} onHide={props.handleClose}>
@@ -37,12 +41,10 @@ function PredictionModal(props) {
                 </Modal.Header>
 
                 <Modal.Body>
-                    Prediction Models go here
-                    <ListGroup variant="flush">
-                        <ListGroup.Item>Age: {props.patient.age ?? 20}</ListGroup.Item>
-                        <ListGroup.Item>Height: {props.patient.height ?? 160} in</ListGroup.Item>
-                        <ListGroup.Item>Weight: {props.patient.weight ?? 150} lb</ListGroup.Item>
-                    </ListGroup>
+                    Heart Disease
+                    <PredictionValue chance={0.26} />
+                    Breast Cancer
+                    <PredictionValue chance={0.84} />
                 </Modal.Body>
 
                 <Modal.Footer>
