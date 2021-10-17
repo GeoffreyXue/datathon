@@ -93,11 +93,6 @@ function StatModal(props) {
                     }
                     </div>
                 </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="danger">Alert</Button>
-                    <Button variant="primary">Schedule</Button>
-                </Modal.Footer>
             </Modal>
         </div>
     );

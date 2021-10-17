@@ -35,12 +35,15 @@ function PredictionModal(props) {
                     <Button variant="danger" onClick={sendAlert}>Alert</Button>
                     <Button variant="primary">Schedule</Button>
                 </Modal.Footer>
-                <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
-                    <Toast.Header>
-                        <strong className="mr-auto">Sent Message</strong>
-                    </Toast.Header>
-                    <Toast.Body>Sent message to {props.patient.Name}</Toast.Body>
-                </Toast>
+                <div className="Toast">
+                    <Toast onClose={() => setShow(false)} show={show} delay={2000} autohide>
+                        <Toast.Header>
+                            <strong className="mr-auto">Sent Message</strong>
+                        </Toast.Header>
+                        <Toast.Body>Successfully sent email to {props.patient.Name}.</Toast.Body>
+                    </Toast>
+                </div>
+
             </Modal>
         </div>
     );
