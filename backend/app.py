@@ -17,7 +17,6 @@ import matplotlib.image as mpimg
 import random
 import simplejson as json
 from flask_cors import CORS
-from other import heartmodel
 '''
 Aiden was here  
 {\__/}
@@ -164,7 +163,6 @@ def heartmodel(id):
   obj = PersonalInfo.query.filter(PersonalInfo.ID == id).one()
   df = obj.__dict__
   print(df)
-  '''
   heart = pd.read_csv("heart_combined.csv")
   from sklearn.model_selection import train_test_split
   X_temp, X_test, y_temp, y_test = \
@@ -208,5 +206,4 @@ def heartmodel(id):
                       verbose=1)
 
   model.predict(X_test)
-'''
-heartmodel(1)
+
