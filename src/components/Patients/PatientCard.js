@@ -37,7 +37,7 @@ function PatientCard(props) {
             <Card style={{ borderWidth: '5px', borderColor: `rgb(${patient.probability * 200}, 30, 30)` }}>
                 <div className='CardImage'>
                     <Card.Img 
-                        style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
+                        style={{maxWidth: '100%', maxHeight: '100%', objectFit: 'cover', objectPosition: 'center' }}
                         variant="top" 
                         src={patient.img ? 'data:image/png;base64,' + patient.img : defaultPicture}/>
                 </div>
