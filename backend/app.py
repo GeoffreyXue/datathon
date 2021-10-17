@@ -40,7 +40,7 @@ db = SQLAlchemy(app)
 db.init_app(app)
 meta = MetaData()
 Session = sessionmaker(bind = db.engine)
-
+sessions = Session()
 class Test(db.Model):
     pid = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -48,6 +48,10 @@ class Test(db.Model):
 
 class PersonalInfo(db.Model):  
     __table__ = Table('PersonalInfo', meta, autoload = True, autoload_with=db.engine)
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+class PersonalBreast(db.Model):  
+    __table__ = Table('PersonalBreast', meta, autoload = True, autoload_with=db.engine)
     def as_dict(self):
        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
@@ -122,8 +126,6 @@ def page():
     pages = request.json.get('pages')
     lists = PersonalInfo.query.filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
     good = [i.as_dict() for i in lists]
-    for i in good:
-        i["probability"] = heartmodel(i["ID"])
     res = {
         'data': [good],
         'final': False
@@ -169,8 +171,10 @@ import seaborn as sns
 
 from copy import deepcopy,copy
 
-def heartmodel(id):
-  obj = PersonalInfo.query.filter(PersonalInfo.ID == id).one()
+def heartmodel(IDS):
+  if(IDS == None):
+      return
+  obj = PersonalInfo.query.filter(PersonalInfo.ID == IDS).one()
   dicts = deepcopy(obj.__dict__)
   heart1 = pd.read_csv("heart.csv")
   heart2 = pd.read_csv("heart2.csv")
@@ -187,7 +191,7 @@ def heartmodel(id):
   df = {i : [j] for i,j in dicts.items()}
   df = pd.DataFrame.from_dict(df)
   df = df[heart1.columns]
-  print(df)
+  
   df["unique"] = 1
   heart1["unique"] = 0
   heart1 = heart1.append(df)
@@ -243,11 +247,16 @@ def heartmodel(id):
                       epochs=80,
                       batch_size=10,
                       validation_split=0.2,
-                      shuffle=True)
+                      shuffle=True,
+                      verbose=0)
 
-  return model.predict(df)
-
-def breastmodel(id):
+  users = PersonalInfo.query.filter(PersonalInfo.ID == IDS).one()
+  users.probability = model.predict(df)[0][0]
+  print(users.probability)
+  db.session.commit()
+def breastmodel(IDS):
+    if(IDS == None):
+        return
     heart = pd.read_csv("heart_combined.csv")
 
     from sklearn.model_selection import train_test_split
@@ -295,6 +304,11 @@ def breastmodel(id):
                         verbose=1)
 
     model.predict(X_test)
-
     np.round(model.predict(X_test),0)
-heartmodel(1)
+if __name__ == '__main__':
+    for i in PersonalInfo.query.all():
+        print(i.__dict__.get("ID",None))
+        heartmodel(i.__dict__.get("ID"))
+    for i in PersonalInfo.query.all():
+        
+        print(i.__dict__['probability'])
