@@ -16,6 +16,12 @@ import matplotlib.image as mpimg
 import random
 import simplejson as json
 from flask_cors import CORS
+'''
+Aiden was here  
+{\__/}
+( • . •)
+/ >♥️
+'''
 # Google Cloud SQL (change this accordingly)
 PASSWORD ="cohen0731"
 PUBLIC_IP_ADDRESS ="35.224.73.35"
@@ -33,7 +39,6 @@ db = SQLAlchemy(app)
 db.init_app(app)
 meta = MetaData()
 Session = sessionmaker(bind = db.engine)
-sessions = Session()
 
 class Test(db.Model):
     pid = db.Column(db.Integer, primary_key=True)
@@ -63,11 +68,11 @@ def averages(rows):
     return lisd
 @app.route('/plots', methods=['POST'])
 def plotting():
-    lists = averages(sessions.query(PersonalInfo).all())
+    lists = averages(PersonalInfo.query.all())
     if(not request.json.get("person", None)):
         return jsonify(success=False)
     person = request.json.get("person")
-    obj = sessions.query(PersonalInfo).filter(PersonalInfo.Name == person).one()
+    obj = PersonalInfo.query().filter(PersonalInfo.Name == person).one()
     dicts = obj.__dict__
     b64 = []
     for i in lists:
@@ -76,7 +81,7 @@ def plotting():
             rgb = [(random.random(), random.random(), random.random()) for i in range(2)]
             plt.yticks(np.arange(0,max(package) * 1.5, step=max(package)/5))
             ax = plt.bar([person, "Average"],package,align='center', color=rgb)
-            plt.ylabel(i[0])
+            plt.title(i[0])
             my_stringIObytes = io.BytesIO()
             plt.savefig(my_stringIObytes, format='jpg')
             my_stringIObytes.seek(0)
@@ -98,7 +103,7 @@ def plotting():
                     x.append(j[1])
                     labels.append(j[0])
             plt.pie(x,labels = labels, colors=rgb)
-            plt.show()
+            plt.title(i[0])
             my_stringIObytes = io.BytesIO()
             plt.savefig(my_stringIObytes, format='jpg')
             my_stringIObytes.seek(0)
@@ -113,7 +118,7 @@ def page():
     if(not request.json.get('pages', None)):
         return jsonify(success = False)
     pages = request.json.get('pages')
-    lists = sessions.query(PersonalInfo).filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
+    lists = PersonalInfo.query.filter(PersonalInfo.ID > 3*(pages-1), PersonalInfo.ID <= (pages) * 3  )
     good = [i.as_dict() for i in lists]
     return Response(json.dumps(good, use_decimal=True), mimetype= 'application/json')
 
