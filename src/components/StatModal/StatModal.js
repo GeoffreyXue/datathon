@@ -12,9 +12,19 @@ function StatModal(props) {
     const [plots, setPlots] = useState([]);
     const [fetching, setFetching] = useState(false);
 
+    const [selectedPlot, setSelectedPlot] = useState(0);
+
+    function backPage() {
+        setSelectedPlot(selectedPlot - 1);
+    }
+
+    function nextPage() {
+        setSelectedPlot(selectedPlot + 1);
+    }
+
     function getStats() {
         var data = {
-            person: "Molly Warren"
+            person: props.patient.Name
         };
 
         setFetching(true);
@@ -63,11 +73,21 @@ function StatModal(props) {
                     <div>
                     {fetching ? <Spinner animation="border" /> :
                         <Container>
-                            <Row xs={1} md={1} className="g-4">
-                                {plots.map((plot, index) => (
-                                    <img key={index} src={plot}/>
-                                ))}
+                            <Row>
+                                <img src={plots[selectedPlot]}/>
                             </Row>
+                            <div className="Pagination">
+                            {selectedPlot > 0 ? 
+                                <Button className="Back" variant="outline-secondary" block size="lg" onClick={backPage}>
+                                    Back
+                                </Button> : <div/>
+                            }
+                            {selectedPlot < plots.length - 1 ? 
+                                <Button className="Next" variant="outline-secondary" block size="lg" onClick={nextPage}>
+                                    Next
+                                </Button> : null
+                            }
+                            </div>
                         </Container>
                     }
                     </div>
