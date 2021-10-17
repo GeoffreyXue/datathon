@@ -21,7 +21,14 @@ function Experimental() {
                 className="Experimental"
                 width="100%" 
                 frameborder="no" 
-                src="https://ruohezhou.shinyapps.io/shiny-prac/?_ga=2.266027663.1207860932.1634424971-1568218130.1634424971"
+                src="https://ruohezhou.shinyapps.io/shiny-prac/"
+                />
+            case 'Breast Cancer':
+                return <iframe 
+                className="Experimental"
+                width="100%" 
+                frameborder="no" 
+                src="https://ruohezhou.shinyapps.io/breast_cancer_prediction/"
                 />
             default:
                 return <div>This has not been implemented yet. Check back for updates!</div>
