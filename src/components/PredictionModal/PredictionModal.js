@@ -41,10 +41,17 @@ function PredictionModal(props) {
                 </Modal.Header>
 
                 <Modal.Body>
-                    Heart Disease
-                    <PredictionValue chance={props.patient.probability} />
-                    Breast Cancer
-                    <PredictionValue chance={0.84} />
+                    <div className="Predictions">
+                        <div className="Prediction">
+                            <div>Heart Disease</div>
+                            <PredictionValue chance={props.patient.probability} />
+                        </div>
+                        <div className="Prediction">
+                            <div>Breast Cancer</div>
+                            <PredictionValue chance={Math.random()} />
+                        </div>
+                    </div>
+
                 </Modal.Body>
 
                 <Modal.Footer>

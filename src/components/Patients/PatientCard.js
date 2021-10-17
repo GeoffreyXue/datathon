@@ -11,6 +11,8 @@ import Activity from './../../images/activity.svg';
 import PredictionModal from "./../PredictionModal/PredictionModal";
 import StatModal from './../StatModal/StatModal';
 
+import PredictionValue from "./PredictionValue";
+
 import defaultPicture from "../../images/default.png";
 
 import './PatientCard.css';
@@ -44,10 +46,14 @@ function PatientCard(props) {
                     <Card.Title>
                         <div className="StatTitle">
                             <div>{patient.Name ?? "Example"}</div>
-                        <div class="alignright">
-                            {patient.Sex == 'M' ? <GenderMale color="royalblue"/> :
-                                <GenderFemale color="hotpink"/>}
-                        </div>
+                            <div className="Prediction">
+                            <div>Breast Cancer</div>
+                                <PredictionValue chance={Math.random()} />
+                            </div>
+                            <div class="alignright">
+                                {patient.Sex == 'M' ? <GenderMale color="royalblue"/> : null }
+                                {patient.Sex == 'F' ? <GenderFemale color="hotpink"/> : null }
+                            </div>
                         </div>
                     </Card.Title>
                    

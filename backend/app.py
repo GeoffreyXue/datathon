@@ -306,3 +306,5 @@ def breastmodel(IDS):
 if __name__ == "__main__":
     for i in PersonalInfo.query.all():
         heartmodel(i.__dict__.get("ID"))
+    for i in PersonalInfo.query.all():
+        print(i.__dict__.get("probability"))

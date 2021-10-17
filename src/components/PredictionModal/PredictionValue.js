@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import Spinner from 'react-bootstrap/Spinner';
-import CloseButton from 'react-bootstrap/CloseButton';
-import ListGroup from "react-bootstrap/ListGroup";
-import Modal from "react-bootstrap/Modal";
-import Toast from 'react-bootstrap/Toast';
+import React from "react";
 import "./PredictionModal.css";
 
-import { CircularProgressbar } from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
-import ScheduleForm from './../ScheduleForm/ScheduleForm';
+import "react-circular-progressbar/dist/styles.css";
 
 function PredictionValue(props) {
     return (
         <CircularProgressbar
-        value={props.chance * 100}
-        text={`${props.chance * 100}%`}
-        styles={{
+        value={Math.round(props.chance * 10000) / 100}
+        text={`${Math.round(props.chance * 10000) / 100}%`}
+        styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
             rotation: 0,
 
@@ -38,7 +31,7 @@ function PredictionValue(props) {
             textColor: "#000",
             trailColor: "#e6b6b6",
             backgroundColor: "#3e98c7"
-        }}
+        })}
     />
     );
 }
