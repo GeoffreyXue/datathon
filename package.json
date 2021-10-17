@@ -1,7 +1,7 @@
 {
   "name": "datathon-testing",
   "version": "0.1.0",
-  "homepage": "http://geoffreyxue.github.io/datathon",
+  "homepage": ".",
   "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {

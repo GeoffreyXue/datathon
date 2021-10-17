@@ -28,10 +28,10 @@ function Navigation() {
             <Nav className="me-auto">
                 {loggedIn ? 
                     <>
-                    <Nav.Link href="/datathon/#patients">Patients</Nav.Link>
-                    <Nav.Link href="/datathon/#calendar">Calendar</Nav.Link>
-                    <Nav.Link href="/datathon/#experimental">Experimental</Nav.Link>
-                    <Nav.Link href="/datathon/#">Logout</Nav.Link>
+                    <Nav.Link href="/patients">Patients</Nav.Link>
+                    <Nav.Link href="/calendar">Calendar</Nav.Link>
+                    <Nav.Link href="/experimental">Experimental</Nav.Link>
+                    <Nav.Link href="/">Logout</Nav.Link>
                     </>
                     : <Nav.Link href="/datathon/#login">Login</Nav.Link>}
                 </Nav> 
