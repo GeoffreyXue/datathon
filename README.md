@@ -18,7 +18,7 @@ Topic Focus - Healthcare
 - [React Router](https://reactrouter.com/) (react-router-dom for switching between tabs)
 - [React Big Calendar](https://jquense.github.io/react-big-calendar/examples/index.html) (Calendar)
 
-### Other important dependencies:
+### Flask primary dependencies:
 - [Keras](https://keras.io/)
 - [SQLAlchemy](https://www.sqlalchemy.org/)
 - [Matplotlib](https://matplotlib.org/)
